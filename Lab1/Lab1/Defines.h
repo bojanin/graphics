@@ -47,8 +47,8 @@
 #define LINEAR_ATTEN 0.01f
 #define QUADRATIC_ATTEN 0.001f
 
-#define WINDOW_WIDTH 1024 // Default window width in pixels
-#define WINDOW_HEIGHT 1024 // Default window height in pixels = width/1.618
+#define WINDOW_WIDTH 512 // Default window width in pixels
+#define WINDOW_HEIGHT 512 // Default window height in pixels = width/1.618
 
 // Small value used to create offset to avoid "surface acne"
 #define EPSILON 1.0E-4f

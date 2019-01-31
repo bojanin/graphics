@@ -14,6 +14,7 @@
 		6527E2272203493B00FFFEDF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6527E2262203493B00FFFEDF /* OpenGL.framework */; };
 		6527E22A220369CD00FFFEDF /* MyRectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6527E228220369CD00FFFEDF /* MyRectangle.cpp */; };
 		6527E22D2203834B00FFFEDF /* Square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6527E22B2203834B00FFFEDF /* Square.cpp */; };
+		6527E2312203B80100FFFEDF /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6527E22F2203B80100FFFEDF /* Triangle.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,8 @@
 		6527E229220369CD00FFFEDF /* MyRectangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRectangle.h; sourceTree = "<group>"; };
 		6527E22B2203834B00FFFEDF /* Square.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Square.cpp; sourceTree = "<group>"; };
 		6527E22C2203834B00FFFEDF /* Square.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Square.h; sourceTree = "<group>"; };
+		6527E22F2203B80100FFFEDF /* Triangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Triangle.cpp; sourceTree = "<group>"; };
+		6527E2302203B80100FFFEDF /* Triangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,15 +81,12 @@
 		6527E210220273AA00FFFEDF /* Lab1 */ = {
 			isa = PBXGroup;
 			children = (
+				6527E22E2203B3A800FFFEDF /* shapes */,
 				6527E21B220273CE00FFFEDF /* Defines.cpp */,
 				6527E219220273CE00FFFEDF /* Defines.h */,
 				6527E218220273CE00FFFEDF /* FrameBuffer.cpp */,
 				6527E21A220273CE00FFFEDF /* FrameBuffer.h */,
 				6527E21D220273CE00FFFEDF /* Lab1.cpp */,
-				6527E228220369CD00FFFEDF /* MyRectangle.cpp */,
-				6527E22B2203834B00FFFEDF /* Square.cpp */,
-				6527E22C2203834B00FFFEDF /* Square.h */,
-				6527E229220369CD00FFFEDF /* MyRectangle.h */,
 				6527E21C220273CE00FFFEDF /* Lab1.h */,
 			);
 			path = Lab1;
@@ -100,6 +100,19 @@
 				6527E2222203483600FFFEDF /* libglut.3.10.0.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6527E22E2203B3A800FFFEDF /* shapes */ = {
+			isa = PBXGroup;
+			children = (
+				6527E228220369CD00FFFEDF /* MyRectangle.cpp */,
+				6527E22B2203834B00FFFEDF /* Square.cpp */,
+				6527E22C2203834B00FFFEDF /* Square.h */,
+				6527E229220369CD00FFFEDF /* MyRectangle.h */,
+				6527E22F2203B80100FFFEDF /* Triangle.cpp */,
+				6527E2302203B80100FFFEDF /* Triangle.h */,
+			);
+			path = shapes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6527E22D2203834B00FFFEDF /* Square.cpp in Sources */,
+				6527E2312203B80100FFFEDF /* Triangle.cpp in Sources */,
 				6527E220220273CE00FFFEDF /* Lab1.cpp in Sources */,
 				6527E21F220273CE00FFFEDF /* Defines.cpp in Sources */,
 				6527E21E220273CE00FFFEDF /* FrameBuffer.cpp in Sources */,

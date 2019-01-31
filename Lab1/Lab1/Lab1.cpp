@@ -1,6 +1,7 @@
 #include "Lab1.h"
 #include "MyRectangle.h"
 #include "Square.h"
+#include "Triangle.h"
 /**
 * Frame buffer that maintains the individual pixel colors in memory
 * before they are displayed on the screen.
@@ -12,22 +13,21 @@ FrameBuffer frameBuffer(WINDOW_WIDTH, WINDOW_HEIGHT);
 * Acts as the display function for the window.
 */
 
-MyRectangle r1(150, 75, 200, 150, color(233,0,0,1.0f));
+// X is left-right
+// Y is Up-down
 MyRectangle r2(300, 250, 75, 35, color(0, 255, 255, 1.0f));
-MyRectangle r0;
 
-Square s1;
-Square s2(350, 400, 150, color(255, 255, 0, 1.0f));
+Square s2(50, 50, 100, color(0, 135, 200, 1.0f));
+Triangle t1(250,100,50,50);
 static void RenderSceneCB()
 {
 	// Clear the color buffer
 	frameBuffer.clearColorAndDepthBuffers(); // Not necessary for ray tracin
 
+
 	// Rendering code that updates the color buffer
-    r0.draw(frameBuffer);
-    r1.draw(frameBuffer);
     r2.draw(frameBuffer);
-    s1.draw(frameBuffer);
+    t1.draw(frameBuffer);
     s2.draw(frameBuffer);
 	 // Display the color buffer
 	frameBuffer.showColorBuffer();
@@ -79,13 +79,13 @@ int main(int argc, char** argv)
     glutPushWindow();
 	// Indicate to GLUT that the flow of control should return to the program after
 	// the window is closed and the GLUTmain loop is exited.
-#warning glutSetOption(X,Y) doesnt exist..
+    #warning glutSetOption(X,Y) doesnt exist..
 	//glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
 	// Callback for window redisplay
 	glutDisplayFunc(RenderSceneCB);
 	glutReshapeFunc(ResizeCB);
-    glutIdleFunc(animate);
+//    glutIdleFunc(animate);
 
 	// ColorBuffer initialization ***********************
 
