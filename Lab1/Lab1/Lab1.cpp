@@ -2,6 +2,7 @@
 #include "MyRectangle.h"
 #include "Square.h"
 #include "Triangle.h"
+#include "Parallelogram.h"
 /**
 * Frame buffer that maintains the individual pixel colors in memory
 * before they are displayed on the screen.
@@ -15,16 +16,18 @@ FrameBuffer frameBuffer(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 // X is left-right
 // Y is Up-down
+
 MyRectangle r2(300, 250, 75, 35, color(255, 255, 0, 1.0f));
 MyRectangle r1(200, 100, 30, 150, color(0, 255, 0, 1.0f));
-Square s2(50, 50, 100, color(255, 0, 0, 1.0f));
+Square s2(50, 250, 100, color(255, 0, 0, 1.0f));
 Triangle t1(250,100,50,50, color(255,255,255, 1.0f));
+Parallelogram p;
 static void RenderSceneCB()
 {
 	// Clear the color buffer
 	frameBuffer.clearColorAndDepthBuffers(); // Not necessary for ray tracin
 
-
+    p.draw(frameBuffer);
 	// Rendering code that updates the color buffer
     r2.draw(frameBuffer);
     r1.draw(frameBuffer);

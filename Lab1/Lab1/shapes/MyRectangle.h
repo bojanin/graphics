@@ -23,7 +23,6 @@ protected:
 
 public:
     //initializer
-//    MyRectangle(int x = 0, int y = 0, int width = 50, int height = 50, color col = color(255, 255, 255, 1.0f)): x(x), y(y), width(width), height(height), rectColor(col) {}
     MyRectangle(int x = 0, int y = 0, int width = 50, int height = 100, color shapeColor = color(255, 255, 255, 1.0f));
 
     // method than can be overridden by subclasses

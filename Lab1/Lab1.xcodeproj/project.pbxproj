@@ -15,6 +15,7 @@
 		6527E22A220369CD00FFFEDF /* MyRectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6527E228220369CD00FFFEDF /* MyRectangle.cpp */; };
 		6527E22D2203834B00FFFEDF /* Square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6527E22B2203834B00FFFEDF /* Square.cpp */; };
 		6527E2312203B80100FFFEDF /* Triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6527E22F2203B80100FFFEDF /* Triangle.cpp */; };
+		65C0A6802204B66000A9CA2B /* Parallelogram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65C0A67E2204B66000A9CA2B /* Parallelogram.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,8 @@
 		6527E22C2203834B00FFFEDF /* Square.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Square.h; sourceTree = "<group>"; };
 		6527E22F2203B80100FFFEDF /* Triangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Triangle.cpp; sourceTree = "<group>"; };
 		6527E2302203B80100FFFEDF /* Triangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
+		65C0A67E2204B66000A9CA2B /* Parallelogram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parallelogram.cpp; sourceTree = "<group>"; };
+		65C0A67F2204B66000A9CA2B /* Parallelogram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Parallelogram.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,12 +108,14 @@
 		6527E22E2203B3A800FFFEDF /* shapes */ = {
 			isa = PBXGroup;
 			children = (
+				6527E229220369CD00FFFEDF /* MyRectangle.h */,
 				6527E228220369CD00FFFEDF /* MyRectangle.cpp */,
 				6527E22B2203834B00FFFEDF /* Square.cpp */,
 				6527E22C2203834B00FFFEDF /* Square.h */,
-				6527E229220369CD00FFFEDF /* MyRectangle.h */,
 				6527E22F2203B80100FFFEDF /* Triangle.cpp */,
 				6527E2302203B80100FFFEDF /* Triangle.h */,
+				65C0A67E2204B66000A9CA2B /* Parallelogram.cpp */,
+				65C0A67F2204B66000A9CA2B /* Parallelogram.h */,
 			);
 			path = shapes;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				6527E21F220273CE00FFFEDF /* Defines.cpp in Sources */,
 				6527E21E220273CE00FFFEDF /* FrameBuffer.cpp in Sources */,
 				6527E22A220369CD00FFFEDF /* MyRectangle.cpp in Sources */,
+				65C0A6802204B66000A9CA2B /* Parallelogram.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,9 +14,7 @@ int MyRectangle::getX() {
     return this->x;
 }
 
-MyRectangle::~MyRectangle() {
-    
-}
+MyRectangle::~MyRectangle() {}
 
 // Accessors
 int MyRectangle::getHeight() {
@@ -58,7 +56,6 @@ void MyRectangle::setColor(color col) {
 }
 
 void MyRectangle::draw(FrameBuffer &buff) {
-    std::cout << "drawn  buffer\n";
     for (int drawnYPixels = y; drawnYPixels <  y + height; drawnYPixels++) {
         for(int drawnXPixels = x; drawnXPixels < x + width; drawnXPixels++) {
             buff.setPixel(drawnXPixels, drawnYPixels, shapeColor);
