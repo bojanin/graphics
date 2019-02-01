@@ -13,3 +13,9 @@ Code clarity is focused on more than code quality for learning benefits.
 * OpenGL
 * GLM
 * GLUT
+
+
+## Labs
+
+* Lab1
+  * Setting up environment and setting pixels to draw simple shapes
