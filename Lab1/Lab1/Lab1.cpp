@@ -17,10 +17,10 @@ FrameBuffer frameBuffer(WINDOW_WIDTH, WINDOW_HEIGHT);
 // X is left-right
 // Y is Up-down
 
-MyRectangle r2(300, 250, 75, 35, color(255, 255, 0, 1.0f));
-MyRectangle r1(200, 100, 30, 150, color(0, 255, 0, 1.0f));
-Square s2(50, 250, 100, color(255, 0, 0, 1.0f));
-Triangle t1(250,100,50,50, color(255,255,255, 1.0f));
+MyRectangle r2(300, 250, 75, 35, getRandomColor());
+MyRectangle r1(200, 100, 30, 150, getRandomColor());
+Square s2(50, 250, 100, getRandomColor());
+Triangle t1(250,100,50,50, getRandomColor());
 Parallelogram p;
 static void RenderSceneCB()
 {
