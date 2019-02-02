@@ -12,26 +12,12 @@ Triangle::Triangle(int x, int y, int base, int height, color col): MyRectangle(x
 
 // Blanks is the amount of blank spaces on each side of every horizontal line.
 void Triangle::draw(FrameBuffer &buff) {
-    int blanks = 0;
+    int skewedPixels = 0;
 
-    //Outer for-loop dictates height of the triangle
-    for(int currYPixel = getY(); currYPixel < getY() + getHeight(); currYPixel++) {
-        int currXPixel = getX();
-
-        // move the current X pixel over the correct amount of blanks spaces
-        // ON THE LEFT SIDE of triangle
-        while(currXPixel < blanks) {
-            currXPixel++;
+    for (int drawnYPixels = y; drawnYPixels <  y + height; drawnYPixels++) {
+        for(int drawnXPixels = x + skewedPixels; drawnXPixels < x + width - skewedPixels; drawnXPixels++) {
+            buff.setPixel(drawnXPixels, drawnYPixels, shapeColor);
         }
-
-        int amountOfPixels = 0;
-
-        //color in correct amount of pixels in before the blank space on the right side.
-        while(amountOfPixels < getWidth() - blanks) {
-            buff.setPixel(currXPixel, currYPixel, shapeColor);
-            amountOfPixels++;
-            currXPixel++;
-        }
-        blanks++;
+        skewedPixels++;
     }
 }

@@ -20,7 +20,7 @@ FrameBuffer frameBuffer(WINDOW_WIDTH, WINDOW_HEIGHT);
 MyRectangle r2(300, 250, 75, 35, getRandomColor());
 MyRectangle r1(200, 100, 30, 150, getRandomColor());
 Square s2(50, 250, 100, getRandomColor());
-Triangle t1(250,100,50,50, getRandomColor());
+Triangle t1(250,100,100,100, getRandomColor());
 Parallelogram p;
 static void RenderSceneCB()
 {
