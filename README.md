@@ -13,6 +13,7 @@ Code clarity is focused on more than code quality for learning benefits.
 * OpenGL
 * GLM
 * GLUT
+* CMake
 
 
 ## Labs
