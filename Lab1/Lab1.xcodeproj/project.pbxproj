@@ -305,6 +305,7 @@
 		6527E216220273AA00FFFEDF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E3G5SAS68Z;
 				LIBRARY_SEARCH_PATHS = (
@@ -318,6 +319,7 @@
 		6527E217220273AA00FFFEDF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E3G5SAS68Z;
 				LIBRARY_SEARCH_PATHS = (
