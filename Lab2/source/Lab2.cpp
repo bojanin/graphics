@@ -153,8 +153,10 @@ void problem5()
 // using the glm length function. Print out the results of both calculations.
 double myLength(const glm::vec3 & v)
 {
+    // length of 3d vector = sqrt (x^2 + y^2 + z^2)
 
-	return 0.0;
+    double squared = pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2); 
+    return sqrt(squared);
 
 } // end myLength
 
@@ -164,7 +166,9 @@ void problem6()
 	std::cout << "Problem 6" << std::endl;
 
 	glm::vec3 v(2, 3, 4);
-
+    std::cout << "Length of v (myLength function used): " << myLength(v) << endl;
+    std::cout << "Length of v (glm::length used): " << glm::length(v) << endl;
+    
 } // end Problem6
 
 
@@ -175,7 +179,8 @@ void problem6()
 glm::vec3 myUnitVector(const glm::vec3 & v)
 {
 
-	return glm::vec3(0, 0, 0);
+    double divisor = myLength(v);
+    return glm::vec3(v.x / divisor, v.y / divisor, v.z / divisor);    
 
 } // end myUnitVector
 
@@ -185,6 +190,11 @@ void problem7()
 	std::cout << "Problem 7" << std::endl;
 
 	glm::vec3 v(2, 3, 4);
+    glm::vec3 myVec(myUnitVector(v));
+    glm::vec3 normalized_vec(glm::normalize(v));
+    
+    std::cout << "myUnitVector func vector: " << glm::to_string(myVec) << endl;
+    std::cout << "glm::normalize vector: " << glm::to_string(normalized_vec) <<endl;
 
 } // end Problem7
 
@@ -198,8 +208,17 @@ void problem7()
 void problem8()
 {
 	std::cout << "Problem 8" << std::endl;
-
+    #warning LOOK AT THIS AGAIN 
 	glm::vec3 v(-4, 2, -3);
+
+    glm::vec3 p(glm::normalize(v));
+    glm::vec3 q(glm::normalize(v) * 3.0);
+    glm::vec3 r(-glm::normalize(v) * 5.0);
+
+    std::cout << "vector v: " << glm::to_string(v) << endl;
+    std::cout << "vector p: " << glm::to_string(p) << endl;
+    std::cout << "vector q: " << glm::to_string(q) << endl;
+    std::cout << "vector r: " << glm::to_string(r) << endl;
 
 } // end Problem8
 
@@ -214,6 +233,8 @@ void problem9()
 	glm::vec3 v(2, -6, 3);
 	glm::vec3 w(-4, 3, 10);
 
+    std::cout << "v + w = " << glm::to_string(v + w) << endl;
+
 } // end Problem9
 
 
@@ -227,7 +248,12 @@ void problem10()
 {
 	std::cout << "Problem 10" << std::endl;
 
-	glm::vec2 position(0, 0);
+    // x is north/south (+3), y is east/west (-7)
+	glm::vec2 north(3, 0);
+	glm::vec2 west(0, -7);
+
+    cout<< "North first, then west: " << glm::to_string(north + west) << endl;
+    cout<< "West first, then north" << glm::to_string(west + north) << endl;
 
 } // end Problem10
 
@@ -239,6 +265,10 @@ void problem11()
 	std::cout << "Problem 11" << std::endl;
 
 	glm::vec2 position(3, 4);
+	glm::vec2 north(3, 0);
+	glm::vec2 west(0, -7);
+
+    std::cout << "position + north + west: " << glm::to_string(position + north + west) << endl;
 
 } // end Problem11
 
@@ -249,6 +279,14 @@ void problem12()
 {
 	std::cout << "Problem 12" << std::endl;
 
+    glm::vec2 x(3, 9);
+    glm::vec2 y(10, 20);
+
+    std::cout << "x: " << glm::to_string(x) << endl;
+    std::cout << "y: " << glm::to_string(y) << endl;
+
+    std::cout << "x - y: " << glm::to_string(x - y) << endl;
+    std::cout << "y - x: " << glm::to_string(y - x) << endl;
 
 } // end Problem12
 

@@ -1,1 +1,0 @@
-/usr/bin/clang++   -std=c++17 -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/output.dir/source/Defines.cpp.o CMakeFiles/output.dir/source/FrameBuffer.cpp.o CMakeFiles/output.dir/source/Lab2.cpp.o  -o output -framework OpenGL -framework OpenGL -framework GLUT -framework Cocoa 
