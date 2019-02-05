@@ -20,3 +20,12 @@ Code clarity is focused on more than code quality for learning benefits.
 
 * Lab1
   * Setting up environment and setting pixels to draw simple shapes
+
+
+## How to run projects
+
+Run the following commands in order.
+
+`cd <lab name>/build`
+`cmake .. && make all`
+`./output

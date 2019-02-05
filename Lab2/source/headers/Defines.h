@@ -39,6 +39,7 @@
 // https://glm.g-truc.net/0.9.9/api/a00736.html#gae6aa26ccb020d281b449619e419a609e
 #include <glm/gtx/euler_angles.hpp>
 
+#include <glm/ext.hpp>
 // #defines for text substitution in source code prior to compile
 
 // Attenuation factors

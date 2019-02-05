@@ -46,6 +46,10 @@ void problem1()
 
 	double x = 45.0;
 
+    // radians = (pi * degrees) / 180;
+    double radians = ( M_PI / 180.0) * x;
+    std::cout << "Radians: " << radians << endl;
+
 } // end Problem1
 
 
@@ -61,6 +65,12 @@ void problem2()
 
 	double x = 2.0943951;
 
+    double degrees = (180.0 / M_PI) * x;
+    std::cout << "Degrees: " << degrees << endl;
+
+    double glm_degrees = glm::degrees(x);
+    std::cout << "glm_degrees: " << glm_degrees << endl;
+
 } // end Problem2
 
 
@@ -70,8 +80,15 @@ void problem2()
 void problem3()
 {
 	std::cout << "Problem 3" << std::endl;
-
 	double cosTheta = 0.34202014332566873304409961468226;
+
+    // glm::acos(x) return the angle in Radians
+    double angle_radians = glm::acos(cosTheta);
+    double angle_degrees = glm::degrees(angle_radians);
+    
+    // cos = angle / height
+    cout << "Radians: " << angle_radians << endl;
+    cout << "Degrees: " << angle_degrees << endl;
 
 } // end Problem3
 
@@ -84,8 +101,16 @@ void problem3()
 void problem4()
 {
 	std::cout << "Problem 4" << std::endl;
-
 	glm::vec3 v(4, -6, 7);
+
+    glm::vec3 p = v * 2.0;
+    glm::vec3 q = -v;  
+    glm::vec3 r = v * 0.75;
+    
+    cout << "vector v: " << glm::to_string(v) << endl;
+    cout << "vector p: " << glm::to_string(p) << endl;
+    cout << "vector q: " << glm::to_string(q) << endl;
+    cout << "vector r: " << glm::to_string(r) << endl;
 
 } // end Problem4
 
@@ -97,8 +122,10 @@ void problem4()
 // when using the overloaded '==' operator. Print out the results.
 bool vectorEquality(const glm::vec3 & v, const glm::vec3 & w)
 {
-
-	return true;
+    return 
+    (v.x == w.x) &&
+    (v.y == w.y) &&
+    (v.z == w.z);   
 
 } // end vectorEquality
 
@@ -106,6 +133,17 @@ void problem5()
 {
 	std::cout << "Problem 5" << std::endl;
 
+    glm::vec3 v(4, 4, 4);
+    glm::vec3 q(4, 4, 4);
+    glm::vec3 r(1, 2, 3);
+    
+    cout << "vector v: " << glm::to_string(v) << endl;
+    cout << "vector q: " << glm::to_string(q) << endl;
+    cout << "vector r: " << glm::to_string(r) << endl;
+
+    cout << "v == q: " << vectorEquality(v, q) << endl;
+    cout << "v == r: " << vectorEquality(v, r) << endl;
+    cout << "q == r: " << vectorEquality(q, r) << endl;
 
 } // end Problem5
 
