@@ -297,9 +297,7 @@ void problem12()
 // Print the results.
 double myDot(const glm::vec3 a, const glm::vec3 b)
 {
-
-	return 0.0;
-
+    return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 } // end myDot
 
 
@@ -309,6 +307,9 @@ void problem13()
 
 	glm::vec3 v(2, 6, 3);
 	glm::vec3 w(-4, 3, 10);
+
+    std::cout << "myDot dot product: " << myDot(v,w) << endl;
+    std::cout << "glm::dot dot product: " << glm::dot(v,w) << endl;
 
 } // end Problem13
 
@@ -324,10 +325,22 @@ void problem14()
 	std::cout << "Problem 14" << std::endl;
 
 	glm::vec3 v(-2, 1, 3);
-
 	glm::vec3 x(2, 6, 3);
 	glm::vec3 w(-4, 3, 10);
 	glm::vec3 q(3, 0, 0);
+
+    double magnitude_v = myLength(v);
+    double magnitude_x = myLength(x);
+    double magnitude_w = myLength(w);
+    double magnitude_q = myLength(q);
+
+    double dot_vx = glm::dot(v,x);
+    double dot_vw = glm::dot(v,w);
+    double dot_vq = glm::dot(v,q);
+
+    cout << "cosTheta of v & x: " << (dot_vx) / ( magnitude_v * magnitude_x ) << endl;
+    cout << "cosTheta of v & w: " << (dot_vw) / ( magnitude_v * magnitude_w ) << endl;
+    cout << "cosTheta of v & q: " << (dot_vq) / ( magnitude_v * magnitude_q ) << endl;
 
 } // end Problem14
 
@@ -347,9 +360,21 @@ void problem14()
 // Print your results.
 int vectorCompare(glm::vec3 a, glm::vec3 b)
 {
+    #warning Ask if this is using trigonometric functions.
+    double dot_ab = myDot(a,b);
+    double magnitude_a = myLength(a);
+    double magnitude_b = myLength(b);
 
-	return 0;
+    double cosTheta = dot_ab / (magnitude_a * magnitude_b);
+    double angle = glm::degrees( glm::acos(cosTheta));
 
+    if(angle < 90.0) {
+        return 1;
+    } else if (angle > 90.0) {
+        return -1;
+    } else {
+        return 0;
+    }
 } // end vectorCompare
 
 void problem15()
@@ -359,6 +384,10 @@ void problem15()
 	glm::vec3 v(0, 10, 0);
 	glm::vec3 w(10, 0, 0);
 	glm::vec3 x(-1, 9, 0);
+
+    std::cout << "vectorCompare(v,w): " << vectorCompare(v,w) << endl;
+    std::cout << "vectorCompare(v,x): " << vectorCompare(v,x) << endl;
+    std::cout << "vectorCompare(x,w): " << vectorCompare(x,w) << endl;
 
 } // end Problem15
 
@@ -370,9 +399,12 @@ void problem15()
 // The result should be 3.152963.)
 double project(glm::vec3 from, glm::vec3 onto)
 {
+// from = a, onto = b
 
-	return 0.0;
+    double dot_ab = glm::dot(from,onto);
+    double magnitude_b = myLength(onto);    
 
+    return dot_ab / abs(magnitude_b);
 } // end project
 
 
@@ -380,8 +412,12 @@ void problem16()
 {
 	std::cout << "Problem 16" << std::endl;
 
-	glm::vec3 v(2, 6, 3);
-	glm::vec3 w(-4, 3, 10);
+	glm::vec3 v(3, 4, 5);
+	glm::vec3 w(2, -2, 3);
+	glm::vec3 r(2, 6, 3);
+	glm::vec3 q(-4, 3, 10);
+    std::cout << "projection of [3, 4, 5] onto [2, -2, 3]: " << project(v,w) << endl;
+    std::cout << "projection of [2, 6, 3] onto [-4, 3, 10]: " << project(r, q) << endl;
 
 } // end Problem16
 
