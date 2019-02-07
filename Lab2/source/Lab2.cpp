@@ -1,4 +1,4 @@
-#include "Lab2.h"
+#include <Lab2.h>
 
 
 /**
@@ -87,8 +87,8 @@ void problem3()
     double angle_degrees = glm::degrees(angle_radians);
     
     // cos = angle / height
-    cout << "Radians: " << angle_radians << endl;
-    cout << "Degrees: " << angle_degrees << endl;
+    std::cout << "Radians: " << angle_radians << endl;
+    std::cout << "Degrees: " << angle_degrees << endl;
 
 } // end Problem3
 
@@ -250,7 +250,7 @@ void problem10()
 
     // x is north/south (+3), y is east/west (-7)
 	glm::vec2 north(3, 0);
-	glm::vec2 west(0, -7);
+	glm::vec2 west(0, 7);
 
     cout<< "North first, then west: " << glm::to_string(north + west) << endl;
     cout<< "West first, then north" << glm::to_string(west + north) << endl;
@@ -266,7 +266,7 @@ void problem11()
 
 	glm::vec2 position(3, 4);
 	glm::vec2 north(3, 0);
-	glm::vec2 west(0, -7);
+	glm::vec2 west(0, 7);
 
     std::cout << "position + north + west: " << glm::to_string(position + north + west) << endl;
 
@@ -429,10 +429,14 @@ void problem17()
 
 	glm::vec3 v(2, 6, 3);
 	glm::vec3 w(-4, 3, 10);
-    glm::vec3 dot(glm::dot(v,w)); 
-    std::cout << "dot product of (v,w): " << glm::to_string(dot)<< endl;
-    std::cout << "cross product of (v,w): " << glm::to_string(glm::cross(v, w)) << endl;
-    
+    glm::vec3 cross(glm::cross(v,w));
+
+   double dot_vcross = glm::dot(v,cross);
+   double dot_wcross = glm::dot(w,cross);
+
+   std::cout << "dot product of v & cross(v,cross): " << dot_vcross << endl;
+   std::cout << "dot product of w & cross(w,cross): " << dot_wcross << endl;
+ 
 } // end Problem17
 
 
@@ -498,9 +502,7 @@ void problem19()
 // three vertices of your choosing. Print out this area as well. 
 double triangleArea(glm::vec3 a, glm::vec3 b, glm::vec3 c)
 {
-
 	return 0.5 * areaOfParallelogram(a,b,c);
-
 } // end triangleArea
 
 
