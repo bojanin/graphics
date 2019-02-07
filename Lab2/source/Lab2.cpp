@@ -360,17 +360,15 @@ void problem14()
 // Print your results.
 int vectorCompare(glm::vec3 a, glm::vec3 b)
 {
-    #warning Ask if this is using trigonometric functions.
     double dot_ab = myDot(a,b);
     double magnitude_a = myLength(a);
     double magnitude_b = myLength(b);
 
     double cosTheta = dot_ab / (magnitude_a * magnitude_b);
-    double angle = glm::degrees( glm::acos(cosTheta));
 
-    if(angle < 90.0) {
+    if(cosTheta > 0) {
         return 1;
-    } else if (angle > 90.0) {
+    } else if (cosTheta < 0) {
         return -1;
     } else {
         return 0;
@@ -431,7 +429,10 @@ void problem17()
 
 	glm::vec3 v(2, 6, 3);
 	glm::vec3 w(-4, 3, 10);
-
+    glm::vec3 dot(glm::dot(v,w)); 
+    std::cout << "dot product of (v,w): " << glm::to_string(dot)<< endl;
+    std::cout << "cross product of (v,w): " << glm::to_string(glm::cross(v, w)) << endl;
+    
 } // end Problem17
 
 
@@ -445,6 +446,8 @@ void problem18()
 
 	glm::vec3 v(2, 6, 3);
 	glm::vec3 w(-4, 3, 10);
+    std::cout << "cross product of v x w: " << glm::to_string(glm::cross(v,w)) << endl;
+    std::cout << "cross product of w x v: " << glm::to_string(glm::cross(w,v)) << endl;
 
 } // end Problem18
 
@@ -459,8 +462,7 @@ void problem18()
 // and [3 0 0]. The result should be 9.)
 double areaOfParallelogram(glm::vec3 a, glm::vec3 b, glm::vec3 c)
 {
-
-	return 0.0f;
+    return myLength(glm::cross(c-a, b - a));
 
 } // end areaOfParallelogram
 
@@ -472,7 +474,18 @@ void problem19()
 	glm::vec3 x(0, 2, 0);
 	glm::vec3 y(0, 0, 0);
 	glm::vec3 z(4, 0, 0);
+    
+    glm::vec3 t(3,2,2);
+    glm::vec3 o(0,0,0);
+    glm::vec3 m(10,10,10);
 
+    glm::vec3 a(0, 3, 0);
+    glm::vec3 b(0, 0, 0);
+    glm::vec3 c(3, 0, 0);
+
+    std::cout << "area of abc: " << areaOfParallelogram(a,b,c) << endl;
+    std::cout << "area of xyz: " << areaOfParallelogram(x,y,z) << endl;
+    std::cout << "area of tom: " << areaOfParallelogram(t,o,m) << endl;
 } // end Problem19
 
 
@@ -486,7 +499,7 @@ void problem19()
 double triangleArea(glm::vec3 a, glm::vec3 b, glm::vec3 c)
 {
 
-	return 0.0;
+	return 0.5 * areaOfParallelogram(a,b,c);
 
 } // end triangleArea
 
@@ -499,6 +512,12 @@ void problem20()
 	glm::vec3 y(0, 0, 0);
 	glm::vec3 z(4, 0, 0);
 
+	glm::vec3 a(10, 0, 0);
+	glm::vec3 b(0, 10, 0);
+	glm::vec3 c(0, 0, 10);
+
+    std::cout << "area of xyz: " << triangleArea(x,y,z) << endl;
+    std::cout << "area of abc: " << triangleArea(a,b,c) << endl;
 } // end Problem20
 
 
@@ -510,7 +529,7 @@ void problem20()
 glm::vec3 findPointingVector(glm::vec3 first, glm::vec3 second)
 {
 
-	return glm::vec3(0, 0, 0);
+    return second - first;	
 
 } // end findPointingVector
 
@@ -520,6 +539,8 @@ void problem21()
 
 	glm::vec3 x(0, 4, 0);
 	glm::vec3 y(4, 0, 0);
+
+    std::cout << "vector x -> y: " << glm::to_string(findPointingVector(x,y)) << endl;
 
 } // end Problem21
 
@@ -532,7 +553,13 @@ void problem21()
 double findAngle(glm::vec3 first, glm::vec3 second)
 {
 
-	return 0.0;
+	double magnitude_first = myLength(first);
+    double magnitude_second = myLength(second);
+
+    double dot_ab = glm::dot(first,second);
+    double cosTheta = dot_ab / (magnitude_first * magnitude_second);
+
+    return glm::degrees(glm::acos(cosTheta));
 
 } // end findAngle
 
@@ -543,6 +570,10 @@ void problem22()
 
 	glm::vec3 x(0, 4, 0);
 	glm::vec3 y(4, 0, 0);
+	glm::vec3 a(0, -2, 0);
+    glm::vec3 b(0, 2, 0); // angle should be 180 degrees
+    std::cout << "angle between x & y: " << findAngle(x,y) << endl;
+    std::cout << "angle between a & b (180) : " << findAngle(a,b) << endl;
 
 } // end Problem22
 
