@@ -1,0 +1,5 @@
+-x
+c++
+-I/Users/tommy/Documents/graphics/Lab3../glm
+-I/Users/tommy/Documents/graphics/Lab3/source/headers
+-std=c++17
