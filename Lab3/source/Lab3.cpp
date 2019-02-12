@@ -50,15 +50,12 @@ struct Circle {
 	dvec2 center;
 	double radius;
 
-	Circle(double r = 1.0, dvec2 ctr = dvec2(0.0, 0.0))
-	{
-
-	} // end Circle constructor
+	Circle(double r = 1.0, dvec2 ctr = dvec2(0.0, 0.0)): center(ctr), radius(r) {};
 
 	double checkPoint(dvec2 pt)
 	{
-
-
+        double result = pow(pt.x - center.x, 2 ) + pow(pt.y - center.y, 2) - pow(radius, 2);
+        return result; 
 	} // end checkPoint
 
 }; // end Circle struct
@@ -67,9 +64,14 @@ struct Circle {
 void problem1()
 {
 	std::cout << "Problem 1" << std::endl;
-
-
-
+    Circle c, far(2, dvec2(3,3));
+    std::cout << c.checkPoint(dvec2(0.5 , 0)) << endl;
+    std::cout << c.checkPoint(dvec2(1, 0)) << endl;
+    std::cout << c.checkPoint(dvec2(2, 0)) << endl;
+    
+    std::cout << far.checkPoint(dvec2(3,4)) << endl; 
+    std::cout << far.checkPoint(dvec2(3,5)) << endl; 
+    std::cout << far.checkPoint(dvec2(3,6)) << endl;
 } // end Problem1
 
 // Create a Sphere struct that is similar to the Circle struct. Again, it should 

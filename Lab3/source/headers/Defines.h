@@ -26,7 +26,7 @@
 #include <glm/gtc/constants.hpp>
 // https://glm.g-truc.net/0.9.9/api/a01370.html
 #include <glm/gtc/quaternion.hpp>
-
+#include <glm/ext.hpp>
 // Allows experimental extensions of glm to be used
 #define GLM_ENABLE_EXPERIMENTAL
 
