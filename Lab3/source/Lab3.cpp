@@ -86,15 +86,30 @@ void problem1()
 // Then test with points of your choosing that are inside, on, and outside a Sphere 
 // that is NOT centered on the origin. Display the results to the console.
 struct Sphere {
+    
+    double radius;
+    dvec3 center;
+    Sphere(double radius = 1.0, dvec3 center = dvec3(0.0, 0.0, 0.0)): center(center), radius(radius) {};
 
-
+    double checkPoint(dvec3 pt) {
+        return pow(pt.x - center.x, 2) + pow(pt.y - center.y, 2) + pow(pt.z - center.z, 2) - pow(radius, 2);
+    }
 }; // end Sphere struct
 
 void problem2()
 {
 	std::cout << "Problem 2" << std::endl;
+    Sphere s;
+    Sphere test(2, dvec3(3, 3, 3));
 
+    std::cout << s.checkPoint(dvec3(0, 0.5, 0)) << endl; 
+    std::cout << s.checkPoint(dvec3(1, 0, 0)) << endl; 
+    std::cout << s.checkPoint(dvec3(0, 0, 4)) << endl; 
 
+     #warning POTENTIALLY WRONG
+    std::cout << test.checkPoint(dvec3(1, 3, 3)) << endl; 
+    std::cout << test.checkPoint(dvec3(3, 4, 3)) << endl; 
+    std::cout << test.checkPoint(dvec3(6, 6, 6)) << endl; 
 } // end Problem2
 
 // Write a struct for a Quadric surface of your choice. It should include a constructor
