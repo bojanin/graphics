@@ -117,12 +117,25 @@ void problem2()
 // manner and display the results.
 
 // Create struct here
+struct Ellipsoid {
+    double offsetA, offsetB, offsetC;
+    dvec3 center;
+    Ellipsoid(double offsetA = 1.0, double offsetB = 2.0, double offsetC = 3.0, dvec3 center = dvec3(0,0,0)): offsetA(offsetA), offsetB(offsetB), offsetC(offsetC),center(center) {};
 
+    double checkPoint(dvec3 pt) {
+        return (pow(pt.x - center.x, 2) / pow(offsetA, 2)) + (pow(pt.y - center.y, 2) / pow(offsetB, 2)) + (pow(pt.z - center.z, 2) / pow(offsetC, 2)) -1;
+    }
+
+};
 void problem3()
 {
 	std::cout << "Problem 3" << std::endl;
-
-
+    Ellipsoid e;
+    Ellipsoid e2(3,2,1, dvec3(1,1,1));
+    
+    std::cout << e.checkPoint(dvec3(1, 0, 0)) << endl;
+    std::cout << e.checkPoint(dvec3(1, 1, 1)) << endl;
+    std::cout << e.checkPoint(dvec3(0, 0, 2)) << endl;
 } // end Problem3
 
 // Write a Plane struct. The constructor should have three vec3s as parameters
