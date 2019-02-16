@@ -133,9 +133,16 @@ void problem3()
     Ellipsoid e;
     Ellipsoid e2(3,2,1, dvec3(1,1,1));
     
+    std::cout << "Ellisoid E: " << endl;
     std::cout << e.checkPoint(dvec3(1, 0, 0)) << endl;
     std::cout << e.checkPoint(dvec3(1, 1, 1)) << endl;
     std::cout << e.checkPoint(dvec3(0, 0, 2)) << endl;
+    
+    
+    std::cout << "Ellisoid E2: " << endl;
+    std::cout << e2.checkPoint(dvec3(-1, 1, 1)) << endl;
+    std::cout << e2.checkPoint(dvec3(1, 1, 2)) << endl;
+    std::cout << e2.checkPoint(dvec3(0, 0, 2)) << endl;
 } // end Problem3
 
 // Write a Plane struct. The constructor should have three vec3s as parameters
@@ -159,15 +166,31 @@ void problem3()
 // return a signed distance? If you believe the answer is "yes," go ahead
 // and modify the functions accordingly in each of the previous questions.
 struct Plane {
+    dvec3 location, normal_vec;
 
+    Plane(dvec3 pt1, dvec3 pt2, dvec3 pt3) {
+        location = pt1;
+        normal_vec = glm::normalize(glm::cross(pt2 - pt1, pt3 - pt1));
+    }
 
+    double signedDistance(dvec3 pt) {
+        return glm::dot(pt, normal_vec);
+    }
 }; // end Plane struct
 
 void problem4()
 {
 	std::cout << "Problem 4" << std::endl;
+    Plane p(dvec3(0, 4, 0), dvec3(0, 0, 0), dvec3(4, 0, 0));
+    Plane p2(dvec3(0, 0, 0), dvec3(0, -5, 0), dvec3(10, 0, 0));
 
+    std::cout << p.signedDistance(dvec3(0, 0, 1)) << endl;
+    std::cout << p.signedDistance(dvec3(0, 0, -1)) << endl;
+    std::cout << p.signedDistance(dvec3(0, 3, 0)) << endl;
 
+    std::cout << p2.signedDistance(dvec3(0, 0, 1)) << endl;
+    std::cout << p2.signedDistance(dvec3(0, 0, -10)) << endl;
+    std::cout << p2.signedDistance(dvec3(0, 3, 0)) << endl;
 } // end Problem4
 
 // Write a struct that supports a parametric representation of a line 
@@ -199,11 +222,21 @@ void problem4()
 // Display the results.
 struct ParametricLine {
 
+    dvec3 pt1, pt2;
+
+    ParametricLine(dvec3 pt1 = dvec3 (0,0,0), dvec3 pt2 = dvec3(1,1,1)): pt1(pt1), pt2(pt2){};
+    
+    dvec3 getPoint(double t) {
+        return pt1 + t * (pt2 - pt1);
+    }
 
 	bool checkPoint(const dvec3 & p, double & t)
 	{
-		t = 0.0;
-		return true;
+        if (glm::dot(pt2, p) == glm::length(p) * glm::length(pt2)) {
+            t = glm::dot(pt2, p);
+            return true;
+        }
+        return false;
 	}
 
 
@@ -212,7 +245,25 @@ struct ParametricLine {
 void problem5()
 {
 	std::cout << "Problem 5" << std::endl;
+    ParametricLine p2(dvec3(0,0,0), dvec3(1, 0, 0));
 
+    double test = 0.0;
+    p2.checkPoint(dvec3(2, 0, 0), test);
+    cout << test << endl;
+
+    test = 0.0;
+    p2.checkPoint(dvec3(0, 3, 0), test);
+    cout << test << endl;
+    
+    test = 0.0;
+    p2.checkPoint(dvec3(3, 0, 0), test);
+    cout << test << endl;
+
+    cout << glm::to_string(p2.getPoint(3.0)) << endl;
+    cout << glm::to_string(p2.getPoint(-3.0)) << endl;
+    cout << glm::to_string(p2.getPoint(0.5)) << endl;
+    cout << glm::to_string(p2.getPoint(13.0)) << endl;
+    cout << glm::to_string(p2.getPoint(0.0)) << endl;
 
 } // end Problem5
 
@@ -229,16 +280,20 @@ void problem5()
 // the results to the console.
 double linearInterpolateScalars(const double & initial, const double & final, const double & t)
 {
-
-	return 0.0;
-
+    if (t <= 0) {return initial;}
+    if (t >= 1) {return final;}
+    return initial + (final - initial)* t;
 } // end linearInterpolateScalars
 
 void problem6()
 {
 	std::cout << "Problem 6" << std::endl;
 
-
+    cout << linearInterpolateScalars(5, 15, -1) << endl; 
+    cout << linearInterpolateScalars(5, 15, 0) << endl; 
+    cout << linearInterpolateScalars(5, 15, 0.6) << endl; 
+    cout << linearInterpolateScalars(5, 15, 1) << endl; 
+    cout << linearInterpolateScalars(5, 15, 20) << endl; 
 } // end Problem6
 
 // Write a function that linearly interpolates between two three
@@ -246,15 +301,23 @@ void problem6()
 // the previous question. Test it with points at (0,0,0) and (4, 4, 0).
 // Use the same parameter values as the previous question. Display the 
 // results.
-dvec3 linearInterpolateVectors()
+dvec3 linearInterpolateVectors(const dvec3 &initial, const dvec3  &final, const double &t)
 {
-	return dvec3();
+    if (t <= 0) {return initial;}
+    if (t >= 1) {return final;}
+
+    return initial + (final - initial) * t;
 }
 
 void problem7()
 {
 	std::cout << "Problem 7" << std::endl;
 
+    cout << linearInterpolateVectors(dvec3(0, 0, 0), dvec3(4, 4, 0), -1) << endl;
+    cout << linearInterpolateVectors(dvec3(0, 0, 0), dvec3(4, 4, 0), 0) << endl;
+    cout << linearInterpolateVectors(dvec3(0, 0, 0), dvec3(4, 4, 0), 0.6) << endl;
+    cout << linearInterpolateVectors(dvec3(0, 0, 0), dvec3(4, 4, 0), 1) << endl;
+    cout << linearInterpolateVectors(dvec3(0, 0, 0), dvec3(4, 4, 0), 20) << endl;
 
 } // end Problem7
 
@@ -274,7 +337,15 @@ void problem8()
 
 	dvec3 v(2, -6, 3);
 	dvec3 w(-4, 3, 10);
+    dvec3 proj = ((glm::dot(v,w) / (pow(glm::length(w), 2))) * w); 
+    dvec3 perp = v - proj;
 
+    cout << "projection of v->w: " << glm::to_string(proj) << endl;
+    cout << "perpendicular component of v: " << glm::to_string(perp) << endl;
+    cout << "dot of proj and perp: " << glm::dot(proj, perp) << endl;
+    string isEqual = (proj + perp) == v ? "True" : "False";
+    cout << isEqual << endl;
+    
 } // end Problem8
 
 
