@@ -9,7 +9,7 @@ FrameBuffer frameBuffer(WINDOW_WIDTH, WINDOW_HEIGHT);
 const color LIGHT_BLUE(0.784, 0.784, 1.0, 1.0);
 
 // Raytracer
-RayTracer rayTrace(frameBuffer, BLACK );
+RayTracer rayTrace(frameBuffer);
 
 // Vector holding all the surfaces in the scene
 SurfaceVector surfaces;
@@ -27,7 +27,6 @@ static void RenderSceneCB()
 	int frameStartTime = glutGet( GLUT_ELAPSED_TIME ); // Get start time
 
 	// Clear the color buffer
-	frameBuffer.clearColorAndDepthBuffers( ); // Not necessary for ray tracing
 
 	// Ray trace the scene to determine the color of all the pixels in the scene
 	rayTrace.raytraceScene( surfaces, lights);

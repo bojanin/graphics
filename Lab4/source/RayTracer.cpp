@@ -54,7 +54,7 @@ void RayTracer::raytraceScene(const SurfaceVector & surfaces, const LightVector 
 	// Iterate through each and every pixel in the rendering window
 
     for(int i = 0; i < colorBuffer.getWindowWidth(); i ++) {
-        for(int j = 0; j < colorBuffer.getWindowHeight(); i++) {
+        for(int j = 0; j < colorBuffer.getWindowHeight(); j++) {
             colorBuffer.setPixel(i, j, defaultColor);
         }
     }
