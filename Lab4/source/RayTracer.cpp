@@ -4,7 +4,7 @@
 RayTracer::RayTracer(FrameBuffer & cBuffer, color defaultColor )
 :colorBuffer(cBuffer), defaultColor(defaultColor), recursionDepth(2)
 {
-	
+    	
 }
 
 
@@ -52,8 +52,12 @@ void RayTracer::raytraceScene(const SurfaceVector & surfaces, const LightVector 
 	this->lightsInScene = lights;
 
 	// Iterate through each and every pixel in the rendering window
-	// TODO
 
+    for(int i = 0; i < colorBuffer.getWindowWidth(); i ++) {
+        for(int j = 0; j < colorBuffer.getWindowHeight(); i++) {
+            colorBuffer.setPixel(i, j, defaultColor);
+        }
+    }
 } // end raytraceScene
 
 

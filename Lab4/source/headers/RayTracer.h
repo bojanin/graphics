@@ -20,7 +20,7 @@ class RayTracer
 	* @param default color to which pixel will be set when there it no intersection
 	* for a ray associated with a particular pixel.
 	*/
-	RayTracer(FrameBuffer & cBuffer, color defaultColor = color(0.0, 0.0, 0.0, 1.0));
+	RayTracer(FrameBuffer & cBuffer, color defaultColor = color(255.0, 0.0, 0.0, 1.0f));
 
 	/**
 	* Ray traces a scene containing a number of surfaces and light sources. Sets every

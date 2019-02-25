@@ -112,11 +112,11 @@ Ray.h
 Material.h
 ../source/headers/Material.h
 
-/Users/tommy/Documents/graphics/Lab4/source/FrameBuffer.cpp
-FrameBuffer.h
-/Users/tommy/Documents/graphics/Lab4/source/FrameBuffer.h
-
 /Users/tommy/Documents/graphics/Lab4/source/RasterUser.cpp
 RasterUser.h
 /Users/tommy/Documents/graphics/Lab4/source/RasterUser.h
+
+/Users/tommy/Documents/graphics/Lab4/source/RayTracer.cpp
+RayTracer.h
+/Users/tommy/Documents/graphics/Lab4/source/RayTracer.h
 
