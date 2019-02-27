@@ -26,8 +26,12 @@ HitRecord Plane::findClosestIntersection( const Ray & ray )
 {
 	HitRecord hitRecord;
 
-	// TODO
-
+    if (glm::dot(ray.direct, n) == 0) return hitRecord;
+    
+    hitRecord.t = glm::dot(a - ray.origin, n) / glm::dot(ray.direct, n);
+    if (hitRecord.t < 0) hitRecord.t = FLT_MAX;
+    hitRecord.interceptPoint = ray.origin + hitRecord.t * ray.direct;
+    hitRecord.material = material;
 	return hitRecord;
 
 } // end findClosestIntersection

@@ -10,16 +10,27 @@ RayTracer::RayTracer(FrameBuffer & cBuffer, color defaultColor )
 
 void RayTracer::setCameraFrame(const dvec3 & viewPosition, const dvec3 & viewingDirection, dvec3 up)
 {
-	// TODO
 
+//    eye = viewPosition;
+
+    w = glm::normalize(-viewingDirection);
+    u = glm::normalize(glm::cross(up, w));
+    v = glm::normalize(glm::cross(w, u));
 } // end setCameraFrame
 
 
 void RayTracer::calculatePerspectiveViewingParameters(const double & verticalFieldOfViewDegrees)
 {
 
-	// TODO
-
+    double verticalFOV = glm::radians(verticalFieldOfViewDegrees / 2.0);
+    
+    distToPlane = 1 / glm::tan(verticalFOV );
+    topLimit = distToPlane * tan(verticalFOV );
+	rightLimit = topLimit * ((double)colorBuffer.getWindowWidth()/colorBuffer.getWindowHeight());
+    leftLimit = -rightLimit;
+    bottomLimit = -topLimit;
+	nx = (double)colorBuffer.getWindowWidth();
+	ny = (double)colorBuffer.getWindowHeight();
 	renderPerspectiveView = true; // generate perspective view rays
 	
 } // end calculatePerspectiveViewingParameters
@@ -52,10 +63,12 @@ void RayTracer::raytraceScene(const SurfaceVector & surfaces, const LightVector 
 	this->lightsInScene = lights;
 
 	// Iterate through each and every pixel in the rendering window
-
+    
     for(int i = 0; i < colorBuffer.getWindowWidth(); i ++) {
         for(int j = 0; j < colorBuffer.getWindowHeight(); j++) {
-            colorBuffer.setPixel(i, j, defaultColor);
+            Ray ray;
+            renderPerspectiveView == true ? ray = getPerspectiveViewRay(i, j) : ray = getOrthoViewRay(i, j); 
+            colorBuffer.setPixel(i, j, traceIndividualRay(ray, 0));
         }
     }
 } // end raytraceScene
@@ -65,11 +78,14 @@ void RayTracer::raytraceScene(const SurfaceVector & surfaces, const LightVector 
 color RayTracer::traceIndividualRay(const Ray & viewRay, int recursionLevel)
 {
 	// Find surface intersection that is closest to 'e' in the direction 'd.'
-	// TODO
-
-
-	return defaultColor;
-
+    HitRecord closest = HitRecord();
+    for( auto s : surfacesInScene ) {
+        HitRecord h = s->findClosestIntersection(viewRay);
+        if (h.t != FLT_MAX) {
+            closest = h;
+        }
+    }
+    return closest.t != FLT_MAX ? closest.material.diffuseColor : defaultColor; 
 
 } // end traceRay
 
@@ -91,8 +107,11 @@ Ray RayTracer::getOrthoViewRay( const int x, const int y)
 Ray RayTracer::getPerspectiveViewRay(const int x, const int y)
 {
 	Ray perspectiveViewRay;
+    perspectiveViewRay.origin = eye;
 
-	// TODO
+    dvec2 coords = getImagePlaneCoordinates(x, y);
+    dvec3 numerator = (-distToPlane * w) + (coords.x * u) + (coords.y * v);
+    perspectiveViewRay.direct = normalize(numerator);
 
 	return perspectiveViewRay;
 
@@ -101,12 +120,10 @@ Ray RayTracer::getPerspectiveViewRay(const int x, const int y)
 
 dvec2 RayTracer::getImagePlaneCoordinates(const int x, const int y)
 {
+    double ux = leftLimit + (rightLimit - leftLimit) * ((x + 0.5) / nx);
+    double vx = bottomLimit + (topLimit - bottomLimit) * ((y + 0.5) / ny);
 
-	dvec2 uv;
-
-	// TODO
-
-	return uv;
+	return dvec2(ux, vx);
 }
 
 

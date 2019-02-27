@@ -53,7 +53,7 @@ static void ResizeCB(int width, int height)
 
 	rayTrace.setCameraFrame( dvec3( 0, 0, 0 ), dvec3( 0, 0, -1 ), dvec3( 0, 1, 0 ) );
 
-	rayTrace.calculatePerspectiveViewingParameters( 45.0 );
+	rayTrace.calculatePerspectiveViewingParameters(30.0);
 
 	// Signal the operating system to re-render the window
 	glutPostRedisplay();
@@ -124,8 +124,14 @@ void buildScene()
 	srand((unsigned int)time(NULL));
 
 	shared_ptr<Sphere> redBall = make_shared<Sphere>(dvec3( 0.0, 0.0, -10.0 ), 1.5, RED);
+	shared_ptr<Sphere> whiteBall = make_shared<Sphere>(dvec3( 0.0, 1, -10.0 ), 0.5, WHITE);
+	shared_ptr<Sphere> blackBall = make_shared<Sphere>(dvec3( 2, 0.5, -10.0 ), 1, BLACK);
+	shared_ptr<Plane> plane = make_shared<Plane>(dvec3(0, -19.0, 0.0), dvec3(0, 1, 0), CYAN);
 
+    surfaces.push_back(plane);
 	surfaces.push_back(redBall);
+	surfaces.push_back(whiteBall);
+	surfaces.push_back(blackBall);
 
 	shared_ptr<LightSource> ambientLight = make_shared<LightSource>(color(0.15, 0.15, 0.15, 1.0));
 	shared_ptr<PositionalLight> lightPos = make_shared<PositionalLight>(dvec3(-10.0, 10.0, 10.0), color(1.0, 1.0, 1.0, 1));
@@ -175,7 +181,7 @@ int main(int argc, char** argv)
 	frameBuffer.setClearColor(color(0,0,0,1));
 
 	// Set the color to which pixels will be cleared if there is no intersection.
-	// TODO
+    rayTrace.setDefaultColor(LIGHT_BLUE);
 
 	// Callback for window redisplay
 	glutDisplayFunc(RenderSceneCB);		
