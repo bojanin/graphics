@@ -17,7 +17,10 @@ SurfaceVector surfaces;
 // Vector holding all the light sources in the scene
 LightVector lights;
 
-//***********************************
+shared_ptr<LightSource> ambientLight ;
+shared_ptr<PositionalLight> lightPos ;
+shared_ptr<DirectionalLight> lightDir;
+shared_ptr<Spotlight> spotlight;
 
 /**
 * Acts as the display function for the window. 
@@ -80,6 +83,12 @@ static void KeyboardCB(unsigned char key, int x, int y)
 	case('1') :
 		rayTrace.setRecursionDepth( 1 );
 		break;
+    case('a'):
+        ambientLight->enabled = ambientLight->enabled ? false : true;
+    case('p'):
+        lightPos->enabled = lightPos->enabled ? false : true;
+    case('d'):
+        lightDir->enabled = lightDir->enabled ? false : true;
 	case('2') :
 		rayTrace.setRecursionDepth( 2 );
 		break;
@@ -123,20 +132,26 @@ void buildScene()
 	// Initialize random seed - used to create random colors
 	srand((unsigned int)time(NULL));
 
+    Material redMat(RED);
+    redMat.emissive_col = .3 * RED;
+
 	shared_ptr<Sphere> redBall = make_shared<Sphere>(dvec3( 0.0, 0.0, -10.0 ), 1.5, RED);
-	shared_ptr<Sphere> whiteBall = make_shared<Sphere>(dvec3( 0.0, 1, -10.0 ), 0.5, WHITE);
-	shared_ptr<Sphere> blackBall = make_shared<Sphere>(dvec3( 2, 0.5, -10.0 ), 1, BLACK);
+	shared_ptr<Sphere> whiteBall = make_shared<Sphere>(dvec3( 0.0, 1, -10.0 ), 0.5, BLUE);
+	shared_ptr<Sphere> blackBall = make_shared<Sphere>(dvec3( 2, 0.5, -10.0 ), 1, GREEN);
 	shared_ptr<Plane> plane = make_shared<Plane>(dvec3(0, -19.0, 0.0), dvec3(0, 1, 0), CYAN);
 
     surfaces.push_back(plane);
 	surfaces.push_back(redBall);
 	surfaces.push_back(whiteBall);
 	surfaces.push_back(blackBall);
+    
+    ambientLight = make_shared<LightSource>(BLACK);
+    ambientLight->ambientLightColor = color(0.15, 0.15, 0.15, 1.0f);
+	lightPos = make_shared<PositionalLight>(dvec3(-10.0, 10.0, -10.0), color(1.0, 1.0, 1.0, 1));
+	lightDir = make_shared<DirectionalLight>(dvec3(-10.0,10.0 ,-10.0), color(0.75, 0.75, 0.75, 1));
+    //spotlight = make_shared<Spotlight>(dvec3(-10, 10, -8), dvec3(0,-1,0), glm::cos(glm::radians(15.0)), color(0.75, 0.75, 0.75, 1.0));
 
-	shared_ptr<LightSource> ambientLight = make_shared<LightSource>(color(0.15, 0.15, 0.15, 1.0));
-	shared_ptr<PositionalLight> lightPos = make_shared<PositionalLight>(dvec3(-10.0, 10.0, 10.0), color(1.0, 1.0, 1.0, 1));
-	shared_ptr<DirectionalLight> lightDir = make_shared<DirectionalLight>(dvec3(1, 1, 1), color(0.75, 0.75, 0.75, 1));
-
+    //lights.push_back(spotlight);
 	lights.push_back(lightPos);
 	lights.push_back(lightDir);
 	lights.push_back(ambientLight);

@@ -22,6 +22,7 @@ HitRecord findIntersection( const Ray & ray, const SurfaceVector & surfaces );
 */
 struct LightSource
 {
+    bool enabled = true;
 	LightSource(const color & lightColor) 
 	: diffuseLightColor(lightColor)
 	{
@@ -31,11 +32,11 @@ struct LightSource
 
 	virtual color illuminate(const dvec3 & eyeVector, HitRecord & closestHit, const SurfaceVector & surfaces)
 	{
-		return BLACK;
+        if (enabled) {
+            return closestHit.material.ambientColor * ambientLightColor;
+        }
+        return BLACK;
 	}
-
-
-
 
 	/*
 	* Ambient color and intensity of the light.
@@ -67,7 +68,20 @@ struct PositionalLight : public LightSource
 
 	virtual color illuminate(const glm::dvec3 & eyeVector, HitRecord & closestHit, const SurfaceVector & surfaces)
 	{
-		return BLACK;
+        color totalLight = BLACK;
+        if(enabled) {
+
+            dvec3 lightDirection = (lightPosition - closestHit.interceptPoint) 
+                                / glm::length(lightPosition - closestHit.interceptPoint);
+            dvec3 reflectionVec = glm::normalize(glm::reflect(-lightDirection, closestHit.surfaceNormal));
+
+            totalLight += glm::max(glm::dot(lightDirection, closestHit.surfaceNormal), 0.0) *
+                      diffuseLightColor * closestHit.material.diffuseColor;
+            //totalLight += glm::pow(glm::max(0.0, glm::dot(reflectionVec, eyeVector)),
+                       //closestHit.material.shininess) * specularLightColor * closestHit.material.specularColor;
+            return totalLight ;
+        }
+        return totalLight;
 	}
 
 
@@ -91,7 +105,23 @@ struct DirectionalLight : public LightSource
 
 	virtual color illuminate(const dvec3 & eyeVector, HitRecord & closestHit, const SurfaceVector & surfaces)
 	{
-		return BLACK;
+        if (enabled) {
+            color totalLight = closestHit.material.emissive_col;
+            dvec3 reflectionVec = glm::normalize(glm::reflect(-lightDirection, closestHit.surfaceNormal));
+
+            //ambient
+            totalLight += (LightSource::illuminate(eyeVector, closestHit, surfaces));
+
+            //diffuse
+            totalLight += glm::max(glm::dot(lightDirection, closestHit.surfaceNormal), 0.0) *
+                          diffuseLightColor * closestHit.material.diffuseColor;
+            // change lower 2nd param in pow to increase highlighting in sphere
+            // specular color
+            totalLight += glm::pow(glm::max(0.0, glm::dot(reflectionVec, eyeVector)),
+                         closestHit.material.shininess) * specularLightColor * closestHit.material.specularColor;
+                return totalLight;
+        }
+        return BLACK;
 	}
 
 	/**
@@ -99,6 +129,32 @@ struct DirectionalLight : public LightSource
 	* the direction in which the light is shining.
 	*/
 	glm::dvec3 lightDirection; 
+};
+
+struct Spotlight: public PositionalLight {
+    // unit vector that points in the direction 
+    // that the light is shining
+    dvec3 spotDirection;
+
+    //angle in radians of half the spot light beam;
+    double cutOffCosineRadians;
+
+    Spotlight(dvec3 position, dvec3 direction,
+              double cutOffCosineRadians, const color & colorOfLight ): 
+              PositionalLight(position, colorOfLight), spotDirection(glm::normalize(direction)),
+              cutOffCosineRadians(cutOffCosineRadians) {}
+
+    virtual color illuminate(const glm::dvec3& eyeVector,HitRecord& closestHit,const SurfaceVector& surfaces) {
+
+        dvec3 lightDirection = (PositionalLight::lightPosition - closestHit.interceptPoint) 
+                           / glm::length(lightPosition - closestHit.interceptPoint);
+        double spotCos = glm::dot(-lightDirection, spotDirection);
+        if(spotCos > cutOffCosineRadians) {
+        double falloffFactor = (1-(1-spotCos)) / (1-cutOffCosineRadians);
+            return falloffFactor * PositionalLight::illuminate(eyeVector, closestHit, surfaces);
+        }
+        return BLACK; 
+    }
 };
 
 

@@ -85,6 +85,15 @@ color RayTracer::traceIndividualRay(const Ray & viewRay, int recursionLevel)
             closest = h;
         }
     }
+    if (closest.t < FLT_MAX) {
+        color total = BLACK;
+        for (auto l : lightsInScene) {
+            // CHANGE TO -viewRay.direct perhaps
+            total += l->illuminate(viewRay.direct, closest, surfacesInScene);
+            total += closest.material.emissive_col;
+        }
+        return total;
+    }
     return closest.t != FLT_MAX ? closest.material.diffuseColor : defaultColor; 
 
 } // end traceRay

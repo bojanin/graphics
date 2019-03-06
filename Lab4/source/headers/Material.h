@@ -14,6 +14,8 @@ struct Material
 	
 	// Diffuse color of the surface.
 	color diffuseColor;
+    double shininess = 32.0;
+    color emissive_col = BLACK;
 
 	// Specular color of the surface (white for a shiny surface).
 	color specularColor = WHITE;
