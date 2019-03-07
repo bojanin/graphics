@@ -133,12 +133,13 @@ void buildScene()
 	srand((unsigned int)time(NULL));
 
     Material redMat(RED);
-    redMat.emissive_col = .3 * RED;
+    redMat.emissive_col = .03 * RED;
 
 	shared_ptr<Sphere> redBall = make_shared<Sphere>(dvec3( 0.0, 0.0, -10.0 ), 1.5, RED);
 	shared_ptr<Sphere> whiteBall = make_shared<Sphere>(dvec3( 0.0, 1, -10.0 ), 0.5, BLUE);
 	shared_ptr<Sphere> blackBall = make_shared<Sphere>(dvec3( 2, 0.5, -10.0 ), 1, GREEN);
 	shared_ptr<Plane> plane = make_shared<Plane>(dvec3(0, -19.0, 0.0), dvec3(0, 1, 0), CYAN);
+    redBall->material = redMat;
 
     surfaces.push_back(plane);
 	surfaces.push_back(redBall);
@@ -149,7 +150,7 @@ void buildScene()
     ambientLight->ambientLightColor = color(0.15, 0.15, 0.15, 1.0f);
 	lightPos = make_shared<PositionalLight>(dvec3(-20.0, 10.0, 10.0), color(1.0, 1.0, 1.0, 1));
 	lightDir = make_shared<DirectionalLight>(dvec3(-10.0,10.0 ,-10.0), color(0.75, 0.75, 0.75, 1));
-    spotlight = make_shared<Spotlight>(dvec3(-10, 10, -8), dvec3(0,-1,0), glm::cos(glm::radians(15.0)), color(0.75, 0.75, 0.75, 1.0));
+    spotlight = make_shared<Spotlight>(dvec3(500, 1000, -10), dvec3(0,-1,0), glm::cos(glm::radians(15.0)), color(0.75, 0.75, 0.75, 1.0));
 
     lights.push_back(spotlight);
 	lights.push_back(lightPos);
