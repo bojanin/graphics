@@ -73,13 +73,13 @@ struct PositionalLight : public LightSource
 
             dvec3 lightDirection = (lightPosition - closestHit.interceptPoint) 
                                 / glm::length(lightPosition - closestHit.interceptPoint);
-            dvec3 reflectionVec = glm::normalize(glm::reflect(-lightDirection, closestHit.surfaceNormal));
+            dvec3 reflectionVec = glm::normalize(glm::reflect(lightDirection, closestHit.surfaceNormal));
 
             totalLight += glm::max(glm::dot(lightDirection, closestHit.surfaceNormal), 0.0) *
                       diffuseLightColor * closestHit.material.diffuseColor;
-            //totalLight += glm::pow(glm::max(0.0, glm::dot(reflectionVec, eyeVector)),
-                       //closestHit.material.shininess) * specularLightColor * closestHit.material.specularColor;
-            return totalLight ;
+            totalLight += glm::pow(glm::max(0.0, glm::dot(reflectionVec, eyeVector)),
+                       closestHit.material.shininess) * specularLightColor * closestHit.material.specularColor;
+            return totalLight + LightSource::illuminate(eyeVector, closestHit, surfaces);
         }
         return totalLight;
 	}
@@ -107,7 +107,7 @@ struct DirectionalLight : public LightSource
 	{
         if (enabled) {
             color totalLight = closestHit.material.emissive_col;
-            dvec3 reflectionVec = glm::normalize(glm::reflect(-lightDirection, closestHit.surfaceNormal));
+            dvec3 reflectionVec = glm::normalize(glm::reflect(lightDirection, closestHit.surfaceNormal));
 
             //ambient
             totalLight += (LightSource::illuminate(eyeVector, closestHit, surfaces));

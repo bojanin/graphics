@@ -147,11 +147,11 @@ void buildScene()
     
     ambientLight = make_shared<LightSource>(BLACK);
     ambientLight->ambientLightColor = color(0.15, 0.15, 0.15, 1.0f);
-	lightPos = make_shared<PositionalLight>(dvec3(-10.0, 10.0, -10.0), color(1.0, 1.0, 1.0, 1));
+	lightPos = make_shared<PositionalLight>(dvec3(-20.0, 10.0, 10.0), color(1.0, 1.0, 1.0, 1));
 	lightDir = make_shared<DirectionalLight>(dvec3(-10.0,10.0 ,-10.0), color(0.75, 0.75, 0.75, 1));
-    //spotlight = make_shared<Spotlight>(dvec3(-10, 10, -8), dvec3(0,-1,0), glm::cos(glm::radians(15.0)), color(0.75, 0.75, 0.75, 1.0));
+    spotlight = make_shared<Spotlight>(dvec3(-10, 10, -8), dvec3(0,-1,0), glm::cos(glm::radians(15.0)), color(0.75, 0.75, 0.75, 1.0));
 
-    //lights.push_back(spotlight);
+    lights.push_back(spotlight);
 	lights.push_back(lightPos);
 	lights.push_back(lightDir);
 	lights.push_back(ambientLight);
