@@ -19,7 +19,7 @@ CMakeFiles/output.dir/source/Plane.cpp.o
  ../source/headers/Material.h
  ../source/headers/Plane.h
  ../source/headers/Ray.h
- ../source/headers/surface.h
+ ../source/headers/Surface.h
  /Users/tommy/Documents/graphics/Lab4/source/Plane.cpp
 CMakeFiles/output.dir/source/RasterUser.cpp.o
  ../source/headers/Defines.h
@@ -33,7 +33,6 @@ CMakeFiles/output.dir/source/RasterUser.cpp.o
  ../source/headers/RayTracer.h
  ../source/headers/Sphere.h
  ../source/headers/Surface.h
- ../source/headers/surface.h
  /Users/tommy/Documents/graphics/Lab4/source/RasterUser.cpp
 CMakeFiles/output.dir/source/RayTracer.cpp.o
  ../source/headers/Defines.h

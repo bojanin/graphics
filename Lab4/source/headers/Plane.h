@@ -1,5 +1,5 @@
 #pragma once
-#include "surface.h"
+#include "Surface.h"
 
 /**
 * Sub-class of Surface that represents inplicit description of a plane.

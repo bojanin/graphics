@@ -142,15 +142,16 @@ struct Spotlight: public PositionalLight {
     Spotlight(dvec3 position, dvec3 direction,
               double cutOffCosineRadians, const color & colorOfLight ): 
               PositionalLight(position, colorOfLight), spotDirection(glm::normalize(direction)),
-              cutOffCosineRadians(cutOffCosineRadians) {}
+              cutOffCosineRadians(glm::radians(cutOffCosineRadians)) {}
 
     virtual color illuminate(const glm::dvec3& eyeVector,HitRecord& closestHit,const SurfaceVector& surfaces) {
 
         dvec3 lightDirection = (PositionalLight::lightPosition - closestHit.interceptPoint) 
                            / glm::length(lightPosition - closestHit.interceptPoint);
         double spotCos = glm::dot(-lightDirection, spotDirection);
+
         if(spotCos > cutOffCosineRadians) {
-        double falloffFactor = (1-(1-spotCos)) / (1-cutOffCosineRadians);
+            double falloffFactor = (1-(1-spotCos)) / (1-cutOffCosineRadians);
             return falloffFactor * PositionalLight::illuminate(eyeVector, closestHit, surfaces);
         }
         return BLACK; 

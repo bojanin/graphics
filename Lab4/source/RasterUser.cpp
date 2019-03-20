@@ -89,6 +89,8 @@ static void KeyboardCB(unsigned char key, int x, int y)
         lightPos->enabled = lightPos->enabled ? false : true;
     case('d'):
         lightDir->enabled = lightDir->enabled ? false : true;
+    case('s'):
+        spotlight->enabled = spotlight->enabled ? false : true;
 	case('2') :
 		rayTrace.setRecursionDepth( 2 );
 		break;
@@ -150,7 +152,7 @@ void buildScene()
     ambientLight->ambientLightColor = color(0.15, 0.15, 0.15, 1.0f);
 	lightPos = make_shared<PositionalLight>(dvec3(-20.0, 10.0, 10.0), color(1.0, 1.0, 1.0, 1));
 	lightDir = make_shared<DirectionalLight>(dvec3(-10.0,10.0 ,-10.0), color(0.75, 0.75, 0.75, 1));
-    spotlight = make_shared<Spotlight>(dvec3(500, 1000, -10), dvec3(0,-1,0), glm::cos(glm::radians(15.0)), color(0.75, 0.75, 0.75, 1.0));
+    spotlight = make_shared<Spotlight>(dvec3(-10, 10, -10), dvec3(0,-1,0), glm::cos(glm::radians(15.0)), color(0.75, 0.75, 0.75, 1.0));
 
     lights.push_back(spotlight);
 	lights.push_back(lightPos);
