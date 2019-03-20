@@ -18,11 +18,17 @@ Code clarity is focused on more than code quality for learning benefits.
 
 ## Labs
 
-* Lab1
+* Lab 1
   * Setting up environment and setting pixels to draw simple shapes
-* Lab2
+* Lab 2
     * 3D Vector mathematics, transformations, trigonometric functions
     * Miscellaneous mathematics required for graphics
+* Lab 3
+    * More miscellaneous mathematics
+    * 2D/3D objects + vectors
+* Lab 4 & 5
+    * 3d objects in scene + planes
+    * shading models on top of objects (directional, positional ,spotlight)
 
 ## How to run projects
 
