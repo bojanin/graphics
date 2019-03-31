@@ -36,6 +36,10 @@ glm/gtx/quaternion.hpp
 glm/gtx/euler_angles.hpp
 -
 
+../source/headers/Ellipsoid.h
+QuadricSurface.h
+../source/headers/QuadricSurface.h
+
 ../source/headers/FrameBuffer.h
 Defines.h
 ../source/headers/Defines.h
@@ -66,6 +70,10 @@ Defines.h
 Surface.h
 ../source/headers/Surface.h
 
+../source/headers/QuadricSurface.h
+Surface.h
+../source/headers/Surface.h
+
 ../source/headers/RasterUser.h
 time.h
 -
@@ -75,6 +83,12 @@ Sphere.h
 ../source/headers/Sphere.h
 Plane.h
 ../source/headers/Plane.h
+SimplePolygon.h
+../source/headers/SimplePolygon.h
+QuadricSurface.h
+../source/headers/QuadricSurface.h
+Ellipsoid.h
+../source/headers/Ellipsoid.h
 
 ../source/headers/Ray.h
 Defines.h
@@ -92,6 +106,10 @@ Surface.h
 Ray.h
 ../source/headers/Ray.h
 
+../source/headers/SimplePolygon.h
+Plane.h
+../source/headers/Plane.h
+
 ../source/headers/Sphere.h
 Surface.h
 ../source/headers/Surface.h
@@ -104,7 +122,45 @@ Ray.h
 Material.h
 ../source/headers/Material.h
 
+/Users/tommy/Documents/graphics/Lab4/source/Defines.cpp
+Defines.h
+/Users/tommy/Documents/graphics/Lab4/source/Defines.h
+iomanip
+-
+
+/Users/tommy/Documents/graphics/Lab4/source/Ellipsoid.cpp
+Ellipsoid.h
+/Users/tommy/Documents/graphics/Lab4/source/Ellipsoid.h
+
+/Users/tommy/Documents/graphics/Lab4/source/FrameBuffer.cpp
+FrameBuffer.h
+/Users/tommy/Documents/graphics/Lab4/source/FrameBuffer.h
+
+/Users/tommy/Documents/graphics/Lab4/source/Plane.cpp
+Plane.h
+/Users/tommy/Documents/graphics/Lab4/source/Plane.h
+
+/Users/tommy/Documents/graphics/Lab4/source/QuadricSurface.cpp
+QuadricSurface.h
+/Users/tommy/Documents/graphics/Lab4/source/QuadricSurface.h
+
 /Users/tommy/Documents/graphics/Lab4/source/RasterUser.cpp
 RasterUser.h
 /Users/tommy/Documents/graphics/Lab4/source/RasterUser.h
+
+/Users/tommy/Documents/graphics/Lab4/source/RayTracer.cpp
+RayTracer.h
+/Users/tommy/Documents/graphics/Lab4/source/RayTracer.h
+
+/Users/tommy/Documents/graphics/Lab4/source/SimplePolygon.cpp
+SimplePolygon.h
+/Users/tommy/Documents/graphics/Lab4/source/SimplePolygon.h
+
+/Users/tommy/Documents/graphics/Lab4/source/Sphere.cpp
+Sphere.h
+/Users/tommy/Documents/graphics/Lab4/source/Sphere.h
+
+/Users/tommy/Documents/graphics/Lab4/source/Surface.cpp
+Surface.h
+/Users/tommy/Documents/graphics/Lab4/source/Surface.h
 

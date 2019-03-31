@@ -5,10 +5,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/tommy/Documents/graphics/Lab4/source/Defines.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/Defines.cpp.o"
+  "/Users/tommy/Documents/graphics/Lab4/source/Ellipsoid.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/Ellipsoid.cpp.o"
   "/Users/tommy/Documents/graphics/Lab4/source/FrameBuffer.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/FrameBuffer.cpp.o"
   "/Users/tommy/Documents/graphics/Lab4/source/Plane.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/Plane.cpp.o"
+  "/Users/tommy/Documents/graphics/Lab4/source/QuadricSurface.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/QuadricSurface.cpp.o"
   "/Users/tommy/Documents/graphics/Lab4/source/RasterUser.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/RasterUser.cpp.o"
   "/Users/tommy/Documents/graphics/Lab4/source/RayTracer.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/RayTracer.cpp.o"
+  "/Users/tommy/Documents/graphics/Lab4/source/SimplePolygon.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/SimplePolygon.cpp.o"
   "/Users/tommy/Documents/graphics/Lab4/source/Sphere.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/Sphere.cpp.o"
   "/Users/tommy/Documents/graphics/Lab4/source/Surface.cpp" "/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles/output.dir/source/Surface.cpp.o"
   )

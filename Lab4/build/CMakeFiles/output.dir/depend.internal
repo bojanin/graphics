@@ -4,6 +4,15 @@
 CMakeFiles/output.dir/source/Defines.cpp.o
  ../source/headers/Defines.h
  /Users/tommy/Documents/graphics/Lab4/source/Defines.cpp
+CMakeFiles/output.dir/source/Ellipsoid.cpp.o
+ ../source/headers/Defines.h
+ ../source/headers/Ellipsoid.h
+ ../source/headers/HitRecord.h
+ ../source/headers/Material.h
+ ../source/headers/QuadricSurface.h
+ ../source/headers/Ray.h
+ ../source/headers/Surface.h
+ /Users/tommy/Documents/graphics/Lab4/source/Ellipsoid.cpp
 CMakeFiles/output.dir/source/FrameBuffer.cpp.o
  ../source/headers/Defines.h
  ../source/headers/FrameBuffer.h
@@ -21,16 +30,27 @@ CMakeFiles/output.dir/source/Plane.cpp.o
  ../source/headers/Ray.h
  ../source/headers/Surface.h
  /Users/tommy/Documents/graphics/Lab4/source/Plane.cpp
+CMakeFiles/output.dir/source/QuadricSurface.cpp.o
+ ../source/headers/Defines.h
+ ../source/headers/HitRecord.h
+ ../source/headers/Material.h
+ ../source/headers/QuadricSurface.h
+ ../source/headers/Ray.h
+ ../source/headers/Surface.h
+ /Users/tommy/Documents/graphics/Lab4/source/QuadricSurface.cpp
 CMakeFiles/output.dir/source/RasterUser.cpp.o
  ../source/headers/Defines.h
+ ../source/headers/Ellipsoid.h
  ../source/headers/FrameBuffer.h
  ../source/headers/HitRecord.h
  ../source/headers/Lights.h
  ../source/headers/Material.h
  ../source/headers/Plane.h
+ ../source/headers/QuadricSurface.h
  ../source/headers/RasterUser.h
  ../source/headers/Ray.h
  ../source/headers/RayTracer.h
+ ../source/headers/SimplePolygon.h
  ../source/headers/Sphere.h
  ../source/headers/Surface.h
  /Users/tommy/Documents/graphics/Lab4/source/RasterUser.cpp
@@ -44,6 +64,15 @@ CMakeFiles/output.dir/source/RayTracer.cpp.o
  ../source/headers/RayTracer.h
  ../source/headers/Surface.h
  /Users/tommy/Documents/graphics/Lab4/source/RayTracer.cpp
+CMakeFiles/output.dir/source/SimplePolygon.cpp.o
+ ../source/headers/Defines.h
+ ../source/headers/HitRecord.h
+ ../source/headers/Material.h
+ ../source/headers/Plane.h
+ ../source/headers/Ray.h
+ ../source/headers/SimplePolygon.h
+ ../source/headers/Surface.h
+ /Users/tommy/Documents/graphics/Lab4/source/SimplePolygon.cpp
 CMakeFiles/output.dir/source/Sphere.cpp.o
  ../source/headers/Defines.h
  ../source/headers/HitRecord.h

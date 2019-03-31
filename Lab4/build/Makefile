@@ -150,6 +150,33 @@ source/Defines.cpp.s:
 	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Defines.cpp.s
 .PHONY : source/Defines.cpp.s
 
+source/Ellipsoid.o: source/Ellipsoid.cpp.o
+
+.PHONY : source/Ellipsoid.o
+
+# target to build an object file
+source/Ellipsoid.cpp.o:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Ellipsoid.cpp.o
+.PHONY : source/Ellipsoid.cpp.o
+
+source/Ellipsoid.i: source/Ellipsoid.cpp.i
+
+.PHONY : source/Ellipsoid.i
+
+# target to preprocess a source file
+source/Ellipsoid.cpp.i:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Ellipsoid.cpp.i
+.PHONY : source/Ellipsoid.cpp.i
+
+source/Ellipsoid.s: source/Ellipsoid.cpp.s
+
+.PHONY : source/Ellipsoid.s
+
+# target to generate assembly for a file
+source/Ellipsoid.cpp.s:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Ellipsoid.cpp.s
+.PHONY : source/Ellipsoid.cpp.s
+
 source/FrameBuffer.o: source/FrameBuffer.cpp.o
 
 .PHONY : source/FrameBuffer.o
@@ -204,6 +231,33 @@ source/Plane.cpp.s:
 	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Plane.cpp.s
 .PHONY : source/Plane.cpp.s
 
+source/QuadricSurface.o: source/QuadricSurface.cpp.o
+
+.PHONY : source/QuadricSurface.o
+
+# target to build an object file
+source/QuadricSurface.cpp.o:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/QuadricSurface.cpp.o
+.PHONY : source/QuadricSurface.cpp.o
+
+source/QuadricSurface.i: source/QuadricSurface.cpp.i
+
+.PHONY : source/QuadricSurface.i
+
+# target to preprocess a source file
+source/QuadricSurface.cpp.i:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/QuadricSurface.cpp.i
+.PHONY : source/QuadricSurface.cpp.i
+
+source/QuadricSurface.s: source/QuadricSurface.cpp.s
+
+.PHONY : source/QuadricSurface.s
+
+# target to generate assembly for a file
+source/QuadricSurface.cpp.s:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/QuadricSurface.cpp.s
+.PHONY : source/QuadricSurface.cpp.s
+
 source/RasterUser.o: source/RasterUser.cpp.o
 
 .PHONY : source/RasterUser.o
@@ -257,6 +311,33 @@ source/RayTracer.s: source/RayTracer.cpp.s
 source/RayTracer.cpp.s:
 	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/RayTracer.cpp.s
 .PHONY : source/RayTracer.cpp.s
+
+source/SimplePolygon.o: source/SimplePolygon.cpp.o
+
+.PHONY : source/SimplePolygon.o
+
+# target to build an object file
+source/SimplePolygon.cpp.o:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/SimplePolygon.cpp.o
+.PHONY : source/SimplePolygon.cpp.o
+
+source/SimplePolygon.i: source/SimplePolygon.cpp.i
+
+.PHONY : source/SimplePolygon.i
+
+# target to preprocess a source file
+source/SimplePolygon.cpp.i:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/SimplePolygon.cpp.i
+.PHONY : source/SimplePolygon.cpp.i
+
+source/SimplePolygon.s: source/SimplePolygon.cpp.s
+
+.PHONY : source/SimplePolygon.s
+
+# target to generate assembly for a file
+source/SimplePolygon.cpp.s:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/SimplePolygon.cpp.s
+.PHONY : source/SimplePolygon.cpp.s
 
 source/Sphere.o: source/Sphere.cpp.o
 
@@ -324,18 +405,27 @@ help:
 	@echo "... source/Defines.o"
 	@echo "... source/Defines.i"
 	@echo "... source/Defines.s"
+	@echo "... source/Ellipsoid.o"
+	@echo "... source/Ellipsoid.i"
+	@echo "... source/Ellipsoid.s"
 	@echo "... source/FrameBuffer.o"
 	@echo "... source/FrameBuffer.i"
 	@echo "... source/FrameBuffer.s"
 	@echo "... source/Plane.o"
 	@echo "... source/Plane.i"
 	@echo "... source/Plane.s"
+	@echo "... source/QuadricSurface.o"
+	@echo "... source/QuadricSurface.i"
+	@echo "... source/QuadricSurface.s"
 	@echo "... source/RasterUser.o"
 	@echo "... source/RasterUser.i"
 	@echo "... source/RasterUser.s"
 	@echo "... source/RayTracer.o"
 	@echo "... source/RayTracer.i"
 	@echo "... source/RayTracer.s"
+	@echo "... source/SimplePolygon.o"
+	@echo "... source/SimplePolygon.i"
+	@echo "... source/SimplePolygon.s"
 	@echo "... source/Sphere.o"
 	@echo "... source/Sphere.i"
 	@echo "... source/Sphere.s"

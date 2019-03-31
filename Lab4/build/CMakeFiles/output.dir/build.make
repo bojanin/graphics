@@ -70,9 +70,22 @@ CMakeFiles/output.dir/source/Defines.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/output.dir/source/Defines.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tommy/Documents/graphics/Lab4/source/Defines.cpp -o CMakeFiles/output.dir/source/Defines.cpp.s
 
+CMakeFiles/output.dir/source/Ellipsoid.cpp.o: CMakeFiles/output.dir/flags.make
+CMakeFiles/output.dir/source/Ellipsoid.cpp.o: ../source/Ellipsoid.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/output.dir/source/Ellipsoid.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/output.dir/source/Ellipsoid.cpp.o -c /Users/tommy/Documents/graphics/Lab4/source/Ellipsoid.cpp
+
+CMakeFiles/output.dir/source/Ellipsoid.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/output.dir/source/Ellipsoid.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tommy/Documents/graphics/Lab4/source/Ellipsoid.cpp > CMakeFiles/output.dir/source/Ellipsoid.cpp.i
+
+CMakeFiles/output.dir/source/Ellipsoid.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/output.dir/source/Ellipsoid.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tommy/Documents/graphics/Lab4/source/Ellipsoid.cpp -o CMakeFiles/output.dir/source/Ellipsoid.cpp.s
+
 CMakeFiles/output.dir/source/FrameBuffer.cpp.o: CMakeFiles/output.dir/flags.make
 CMakeFiles/output.dir/source/FrameBuffer.cpp.o: ../source/FrameBuffer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/output.dir/source/FrameBuffer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/output.dir/source/FrameBuffer.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/output.dir/source/FrameBuffer.cpp.o -c /Users/tommy/Documents/graphics/Lab4/source/FrameBuffer.cpp
 
 CMakeFiles/output.dir/source/FrameBuffer.cpp.i: cmake_force
@@ -85,7 +98,7 @@ CMakeFiles/output.dir/source/FrameBuffer.cpp.s: cmake_force
 
 CMakeFiles/output.dir/source/Plane.cpp.o: CMakeFiles/output.dir/flags.make
 CMakeFiles/output.dir/source/Plane.cpp.o: ../source/Plane.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/output.dir/source/Plane.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/output.dir/source/Plane.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/output.dir/source/Plane.cpp.o -c /Users/tommy/Documents/graphics/Lab4/source/Plane.cpp
 
 CMakeFiles/output.dir/source/Plane.cpp.i: cmake_force
@@ -96,9 +109,22 @@ CMakeFiles/output.dir/source/Plane.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/output.dir/source/Plane.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tommy/Documents/graphics/Lab4/source/Plane.cpp -o CMakeFiles/output.dir/source/Plane.cpp.s
 
+CMakeFiles/output.dir/source/QuadricSurface.cpp.o: CMakeFiles/output.dir/flags.make
+CMakeFiles/output.dir/source/QuadricSurface.cpp.o: ../source/QuadricSurface.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/output.dir/source/QuadricSurface.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/output.dir/source/QuadricSurface.cpp.o -c /Users/tommy/Documents/graphics/Lab4/source/QuadricSurface.cpp
+
+CMakeFiles/output.dir/source/QuadricSurface.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/output.dir/source/QuadricSurface.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tommy/Documents/graphics/Lab4/source/QuadricSurface.cpp > CMakeFiles/output.dir/source/QuadricSurface.cpp.i
+
+CMakeFiles/output.dir/source/QuadricSurface.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/output.dir/source/QuadricSurface.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tommy/Documents/graphics/Lab4/source/QuadricSurface.cpp -o CMakeFiles/output.dir/source/QuadricSurface.cpp.s
+
 CMakeFiles/output.dir/source/RasterUser.cpp.o: CMakeFiles/output.dir/flags.make
 CMakeFiles/output.dir/source/RasterUser.cpp.o: ../source/RasterUser.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/output.dir/source/RasterUser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/output.dir/source/RasterUser.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/output.dir/source/RasterUser.cpp.o -c /Users/tommy/Documents/graphics/Lab4/source/RasterUser.cpp
 
 CMakeFiles/output.dir/source/RasterUser.cpp.i: cmake_force
@@ -111,7 +137,7 @@ CMakeFiles/output.dir/source/RasterUser.cpp.s: cmake_force
 
 CMakeFiles/output.dir/source/RayTracer.cpp.o: CMakeFiles/output.dir/flags.make
 CMakeFiles/output.dir/source/RayTracer.cpp.o: ../source/RayTracer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/output.dir/source/RayTracer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/output.dir/source/RayTracer.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/output.dir/source/RayTracer.cpp.o -c /Users/tommy/Documents/graphics/Lab4/source/RayTracer.cpp
 
 CMakeFiles/output.dir/source/RayTracer.cpp.i: cmake_force
@@ -122,9 +148,22 @@ CMakeFiles/output.dir/source/RayTracer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/output.dir/source/RayTracer.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tommy/Documents/graphics/Lab4/source/RayTracer.cpp -o CMakeFiles/output.dir/source/RayTracer.cpp.s
 
+CMakeFiles/output.dir/source/SimplePolygon.cpp.o: CMakeFiles/output.dir/flags.make
+CMakeFiles/output.dir/source/SimplePolygon.cpp.o: ../source/SimplePolygon.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/output.dir/source/SimplePolygon.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/output.dir/source/SimplePolygon.cpp.o -c /Users/tommy/Documents/graphics/Lab4/source/SimplePolygon.cpp
+
+CMakeFiles/output.dir/source/SimplePolygon.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/output.dir/source/SimplePolygon.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/tommy/Documents/graphics/Lab4/source/SimplePolygon.cpp > CMakeFiles/output.dir/source/SimplePolygon.cpp.i
+
+CMakeFiles/output.dir/source/SimplePolygon.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/output.dir/source/SimplePolygon.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/tommy/Documents/graphics/Lab4/source/SimplePolygon.cpp -o CMakeFiles/output.dir/source/SimplePolygon.cpp.s
+
 CMakeFiles/output.dir/source/Sphere.cpp.o: CMakeFiles/output.dir/flags.make
 CMakeFiles/output.dir/source/Sphere.cpp.o: ../source/Sphere.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/output.dir/source/Sphere.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/output.dir/source/Sphere.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/output.dir/source/Sphere.cpp.o -c /Users/tommy/Documents/graphics/Lab4/source/Sphere.cpp
 
 CMakeFiles/output.dir/source/Sphere.cpp.i: cmake_force
@@ -137,7 +176,7 @@ CMakeFiles/output.dir/source/Sphere.cpp.s: cmake_force
 
 CMakeFiles/output.dir/source/Surface.cpp.o: CMakeFiles/output.dir/flags.make
 CMakeFiles/output.dir/source/Surface.cpp.o: ../source/Surface.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/output.dir/source/Surface.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/output.dir/source/Surface.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/output.dir/source/Surface.cpp.o -c /Users/tommy/Documents/graphics/Lab4/source/Surface.cpp
 
 CMakeFiles/output.dir/source/Surface.cpp.i: cmake_force
@@ -151,10 +190,13 @@ CMakeFiles/output.dir/source/Surface.cpp.s: cmake_force
 # Object files for target output
 output_OBJECTS = \
 "CMakeFiles/output.dir/source/Defines.cpp.o" \
+"CMakeFiles/output.dir/source/Ellipsoid.cpp.o" \
 "CMakeFiles/output.dir/source/FrameBuffer.cpp.o" \
 "CMakeFiles/output.dir/source/Plane.cpp.o" \
+"CMakeFiles/output.dir/source/QuadricSurface.cpp.o" \
 "CMakeFiles/output.dir/source/RasterUser.cpp.o" \
 "CMakeFiles/output.dir/source/RayTracer.cpp.o" \
+"CMakeFiles/output.dir/source/SimplePolygon.cpp.o" \
 "CMakeFiles/output.dir/source/Sphere.cpp.o" \
 "CMakeFiles/output.dir/source/Surface.cpp.o"
 
@@ -162,15 +204,18 @@ output_OBJECTS = \
 output_EXTERNAL_OBJECTS =
 
 output: CMakeFiles/output.dir/source/Defines.cpp.o
+output: CMakeFiles/output.dir/source/Ellipsoid.cpp.o
 output: CMakeFiles/output.dir/source/FrameBuffer.cpp.o
 output: CMakeFiles/output.dir/source/Plane.cpp.o
+output: CMakeFiles/output.dir/source/QuadricSurface.cpp.o
 output: CMakeFiles/output.dir/source/RasterUser.cpp.o
 output: CMakeFiles/output.dir/source/RayTracer.cpp.o
+output: CMakeFiles/output.dir/source/SimplePolygon.cpp.o
 output: CMakeFiles/output.dir/source/Sphere.cpp.o
 output: CMakeFiles/output.dir/source/Surface.cpp.o
 output: CMakeFiles/output.dir/build.make
 output: CMakeFiles/output.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable output"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/tommy/Documents/graphics/Lab4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable output"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/output.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

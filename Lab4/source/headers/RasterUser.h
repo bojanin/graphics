@@ -4,8 +4,12 @@
 #include <time.h> 
 
 #include "RayTracer.h"
+#include "Cylinder.h"
 #include "Sphere.h"
 #include "Plane.h"
+#include "SimplePolygon.h"
+#include "QuadricSurface.h"
+#include "Ellipsoid.h"
 
 /**
 * Acts as the display function for the window. 

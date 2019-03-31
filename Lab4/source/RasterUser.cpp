@@ -142,12 +142,14 @@ void buildScene()
 	shared_ptr<Sphere> blackBall = make_shared<Sphere>(dvec3( 2, 0.5, -10.0 ), 1, GREEN);
 	shared_ptr<Plane> plane = make_shared<Plane>(dvec3(0, -19.0, 0.0), dvec3(0, 1, 0), CYAN);
     redBall->material = redMat;
+    shared_ptr<Ellipsoid> ellipsoid = make_shared<Ellipsoid>(dvec3(0,0, -10), 1, 2, 2, RED);
 
     surfaces.push_back(plane);
 	surfaces.push_back(redBall);
 	surfaces.push_back(whiteBall);
 	surfaces.push_back(blackBall);
-    
+    surfaces.push_back(ellipsoid);
+         
     ambientLight = make_shared<LightSource>(BLACK);
     ambientLight->ambientLightColor = color(0.15, 0.15, 0.15, 1.0f);
 	lightPos = make_shared<PositionalLight>(dvec3(-20.0, 10.0, 10.0), color(1.0, 1.0, 1.0, 1));
