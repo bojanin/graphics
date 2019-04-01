@@ -123,6 +123,33 @@ output/fast:
 	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/build
 .PHONY : output/fast
 
+source/Cylinder.o: source/Cylinder.cpp.o
+
+.PHONY : source/Cylinder.o
+
+# target to build an object file
+source/Cylinder.cpp.o:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Cylinder.cpp.o
+.PHONY : source/Cylinder.cpp.o
+
+source/Cylinder.i: source/Cylinder.cpp.i
+
+.PHONY : source/Cylinder.i
+
+# target to preprocess a source file
+source/Cylinder.cpp.i:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Cylinder.cpp.i
+.PHONY : source/Cylinder.cpp.i
+
+source/Cylinder.s: source/Cylinder.cpp.s
+
+.PHONY : source/Cylinder.s
+
+# target to generate assembly for a file
+source/Cylinder.cpp.s:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Cylinder.cpp.s
+.PHONY : source/Cylinder.cpp.s
+
 source/Defines.o: source/Defines.cpp.o
 
 .PHONY : source/Defines.o
@@ -285,6 +312,33 @@ source/RasterUser.cpp.s:
 	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/RasterUser.cpp.s
 .PHONY : source/RasterUser.cpp.s
 
+source/Ray.o: source/Ray.cpp.o
+
+.PHONY : source/Ray.o
+
+# target to build an object file
+source/Ray.cpp.o:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Ray.cpp.o
+.PHONY : source/Ray.cpp.o
+
+source/Ray.i: source/Ray.cpp.i
+
+.PHONY : source/Ray.i
+
+# target to preprocess a source file
+source/Ray.cpp.i:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Ray.cpp.i
+.PHONY : source/Ray.cpp.i
+
+source/Ray.s: source/Ray.cpp.s
+
+.PHONY : source/Ray.s
+
+# target to generate assembly for a file
+source/Ray.cpp.s:
+	$(MAKE) -f CMakeFiles/output.dir/build.make CMakeFiles/output.dir/source/Ray.cpp.s
+.PHONY : source/Ray.cpp.s
+
 source/RayTracer.o: source/RayTracer.cpp.o
 
 .PHONY : source/RayTracer.o
@@ -402,6 +456,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... output"
+	@echo "... source/Cylinder.o"
+	@echo "... source/Cylinder.i"
+	@echo "... source/Cylinder.s"
 	@echo "... source/Defines.o"
 	@echo "... source/Defines.i"
 	@echo "... source/Defines.s"
@@ -420,6 +477,9 @@ help:
 	@echo "... source/RasterUser.o"
 	@echo "... source/RasterUser.i"
 	@echo "... source/RasterUser.s"
+	@echo "... source/Ray.o"
+	@echo "... source/Ray.i"
+	@echo "... source/Ray.s"
 	@echo "... source/RayTracer.o"
 	@echo "... source/RayTracer.i"
 	@echo "... source/RayTracer.s"

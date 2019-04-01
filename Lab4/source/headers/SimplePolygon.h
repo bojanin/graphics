@@ -12,6 +12,10 @@
 class SimplePolygon: public Plane {
 
     public:
-        SimplePolygon(const std::vector<dvec3> vertices, const dvec3 &normal, const color &material);
+        std::vector<dvec3> vertices;
+        SimplePolygon(const std::vector<dvec3> &vertices, const color &material);
+        
+        HitRecord findClosestIntersection(const Ray &ray) override;
+        bool isInside(const dvec3 &point);
 };
 

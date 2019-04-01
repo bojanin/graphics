@@ -8,14 +8,11 @@
 #define CYLINDER_H
 #include "QuadricSurface.h"
 #endif /* end of include guard CYLINDER_H */
+class Cylinder : public QuadricSurface {
+public:
+    double radius, length;
 
-class Cylinder: public QuadricSurface {
-    public:
-        double radius, length;
-
-        Cylinder(const dvec3 position, double length, double radius, const color &mat);
-        Cylinder(const dvec3 position, double length, double radius, const Material &material);
-
-        HitRecord findClosestIntersection(const Ray & ray) override;
-        
+    Cylinder(const dvec3 & position, const color & mat, double radius, double length);
+    Cylinder(const dvec3 & position, const Material & mat, double radius, double length);
+    HitRecord findClosestIntersection(const Ray & ray) override;
 };

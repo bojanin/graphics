@@ -4,12 +4,12 @@
 #include <time.h> 
 
 #include "RayTracer.h"
-#include "Cylinder.h"
 #include "Sphere.h"
 #include "Plane.h"
 #include "SimplePolygon.h"
 #include "QuadricSurface.h"
 #include "Ellipsoid.h"
+#include "Cylinder.h"
 
 /**
 * Acts as the display function for the window. 
@@ -30,6 +30,8 @@ static void SpecialKeysCB(int key, int x, int y);
 // Register as the "idle" function to have the screen continously
 // repainted.
 static void animate();
+
+static void changeMode(char c);
 
 
 

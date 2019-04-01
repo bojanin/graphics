@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Defines.h"
-
-
+#include "HitRecord.h"
 /**
+ *
 * Simple struct that represents a ray.
 */
 struct Ray
@@ -15,5 +15,7 @@ struct Ray
 		origin( rayOrigin ), direct( glm::normalize( rayDirection ) )
 	{
 	}
-
+    HitRecord findIntersection(const Ray &ray, const SurfaceVector & surfaces ); 
 };
+
+

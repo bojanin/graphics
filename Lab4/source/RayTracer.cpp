@@ -68,7 +68,7 @@ void RayTracer::raytraceScene(const SurfaceVector & surfaces, const LightVector 
         for(int j = 0; j < colorBuffer.getWindowHeight(); j++) {
             Ray ray;
             renderPerspectiveView == true ? ray = getPerspectiveViewRay(i, j) : ray = getOrthoViewRay(i, j); 
-            colorBuffer.setPixel(i, j, traceIndividualRay(ray, 0));
+            colorBuffer.setPixel(i, j, traceIndividualRay(ray, recursionDepth));
         }
     }
 } // end raytraceScene
@@ -78,20 +78,22 @@ void RayTracer::raytraceScene(const SurfaceVector & surfaces, const LightVector 
 color RayTracer::traceIndividualRay(const Ray & viewRay, int recursionLevel)
 {
 	// Find surface intersection that is closest to 'e' in the direction 'd.'
-    HitRecord closest = HitRecord();
-    for( auto s : surfacesInScene ) {
-        HitRecord h = s->findClosestIntersection(viewRay);
-        if (h.t != FLT_MAX) {
-            closest = h;
-        }
-    }
+    if(recursionLevel < 0) {
+       return BLACK; 
+    } 
+     
+    HitRecord closest = findIntersection(viewRay,surfacesInScene);
+     
     if (closest.t < FLT_MAX) {
         color total = BLACK;
         for (auto l : lightsInScene) {
             total += l->illuminate(viewRay.direct, closest, surfacesInScene);
             total += closest.material.emissive_col;
         }
-        return total;
+         
+        //Ray reflect = Ray(closest.interceptPoint + (closest.surfaceNormal * EPSILON), glm::reflect(viewRay.direct, closest.interceptPoint)); 
+        Ray reflect = Ray(closest.interceptPoint + closest.surfaceNormal * EPSILON, viewRay.direct - (2 * (glm::dot(viewRay.direct,closest.surfaceNormal )) * closest.surfaceNormal));
+        return total + 0.4 * traceIndividualRay(reflect, --recursionLevel);
     }
     return closest.t != FLT_MAX ? closest.material.diffuseColor : defaultColor; 
 

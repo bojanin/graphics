@@ -71,9 +71,15 @@ struct PositionalLight : public LightSource
         color totalLight = BLACK;
         if(enabled) {
 
+            
             dvec3 lightDirection = (lightPosition - closestHit.interceptPoint) 
                                 / glm::length(lightPosition - closestHit.interceptPoint);
             dvec3 reflectionVec = glm::normalize(glm::reflect(lightDirection, closestHit.surfaceNormal));
+            Ray shadow(closestHit.interceptPoint + closestHit.surfaceNormal * EPSILON, lightDirection);
+            HitRecord hit = findIntersection(shadow,surfaces);
+            if(hit.t != FLT_MAX) {
+                return totalLight;
+            }
 
             totalLight += glm::max(glm::dot(lightDirection, closestHit.surfaceNormal), 0.0) *
                       diffuseLightColor * closestHit.material.diffuseColor;
@@ -108,6 +114,11 @@ struct DirectionalLight : public LightSource
         if (enabled) {
             color totalLight = closestHit.material.emissive_col;
             dvec3 reflectionVec = glm::normalize(glm::reflect(lightDirection, closestHit.surfaceNormal));
+            Ray shadow(closestHit.interceptPoint + closestHit.surfaceNormal * EPSILON, lightDirection);
+            HitRecord hit = findIntersection(shadow,surfaces);
+            if(hit.t != FLT_MAX) {
+                return totalLight;
+            }
 
             //ambient
             totalLight += (LightSource::illuminate(eyeVector, closestHit, surfaces));
@@ -149,6 +160,11 @@ struct Spotlight: public PositionalLight {
         dvec3 lightDirection = (PositionalLight::lightPosition - closestHit.interceptPoint) 
                            / glm::length(lightPosition - closestHit.interceptPoint);
         double spotCos = glm::dot(-lightDirection, spotDirection);
+            Ray shadow(closestHit.interceptPoint + closestHit.surfaceNormal * EPSILON, lightDirection);
+            HitRecord hit = findIntersection(shadow,surfaces);
+            if(hit.t != FLT_MAX) {
+                return BLACK;
+            }
 
         if(spotCos > cutOffCosineRadians) {
             double falloffFactor = (1-(1-spotCos)) / (1-cutOffCosineRadians);

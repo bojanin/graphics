@@ -21,6 +21,7 @@ shared_ptr<LightSource> ambientLight ;
 shared_ptr<PositionalLight> lightPos ;
 shared_ptr<DirectionalLight> lightDir;
 shared_ptr<Spotlight> spotlight;
+bool isNightTime = false;
 
 /**
 * Acts as the display function for the window. 
@@ -56,7 +57,7 @@ static void ResizeCB(int width, int height)
 
 	rayTrace.setCameraFrame( dvec3( 0, 0, 0 ), dvec3( 0, 0, -1 ), dvec3( 0, 1, 0 ) );
 
-	rayTrace.calculatePerspectiveViewingParameters(30.0);
+	rayTrace.calculatePerspectiveViewingParameters(45);
 
 	// Signal the operating system to re-render the window
 	glutPostRedisplay();
@@ -100,6 +101,12 @@ static void KeyboardCB(unsigned char key, int x, int y)
 	case('4') :
 		rayTrace.setRecursionDepth( 4 );
 		break;
+    case('m'):
+        changeMode('m');
+        break;
+    case('n'):
+        changeMode('n');  
+        break;
 	default:
 		std::cout << key << " key pressed." << std::endl;
 	}
@@ -107,6 +114,24 @@ static void KeyboardCB(unsigned char key, int x, int y)
 	glutPostRedisplay();
 
 } // end KeyboardCB
+
+static void changeMode(char c) {
+    ambientLight->enabled = true;
+    spotlight->enabled = true;
+    lightDir->enabled = true;
+    lightPos->enabled = true; 
+
+    ambientLight->ambientLightColor = color(0.15,0.15,0.15, 1.0f);
+    lightPos->diffuseLightColor = color(1.0,1.0,1.0,1);
+    lightDir->diffuseLightColor = color(0.75,0.75,0.75,1.0);
+    spotlight->diffuseLightColor = color(0.75,0.75,0.75,1);
+    if(c == 'n') {
+        ambientLight->ambientLightColor = ambientLight->ambientLightColor * .0001;
+        lightPos->diffuseLightColor = lightPos->diffuseLightColor * .0001;
+        lightDir->diffuseLightColor = lightDir->diffuseLightColor * 0.0001;
+        spotlight->diffuseLightColor = spotlight->diffuseLightColor * 0.0001;
+    }
+}
 
 
 // Responds to presses of the arrow keys
@@ -137,18 +162,23 @@ void buildScene()
     Material redMat(RED);
     redMat.emissive_col = .03 * RED;
 
-	shared_ptr<Sphere> redBall = make_shared<Sphere>(dvec3( 0.0, 0.0, -10.0 ), 1.5, RED);
-	shared_ptr<Sphere> whiteBall = make_shared<Sphere>(dvec3( 0.0, 1, -10.0 ), 0.5, BLUE);
-	shared_ptr<Sphere> blackBall = make_shared<Sphere>(dvec3( 2, 0.5, -10.0 ), 1, GREEN);
+	shared_ptr<Sphere> redBall = make_shared<Sphere>(dvec3( -1.0, 1.0, -10.0 ), 1.5, RED);
+	shared_ptr<Sphere> whiteBall = make_shared<Sphere>(dvec3( 0.0, -1, -10.0 ), 0.5, WHITE);
+	shared_ptr<Sphere> blackBall = make_shared<Sphere>(dvec3( 2, 3, -10.0 ), 1, BLACK);
 	shared_ptr<Plane> plane = make_shared<Plane>(dvec3(0, -19.0, 0.0), dvec3(0, 1, 0), CYAN);
     redBall->material = redMat;
-    shared_ptr<Ellipsoid> ellipsoid = make_shared<Ellipsoid>(dvec3(0,0, -10), 1, 2, 2, RED);
+    shared_ptr<Ellipsoid> ellipsoid = make_shared<Ellipsoid>(dvec3(-3,-3, -10), 1, 2, 2, GRAY);
+    shared_ptr<Cylinder> cyl = make_shared <Cylinder>(dvec3(3.0,-2.0,-10.0), YELLOW, 1.0, 2.0);
+    std::vector<dvec3> vertices = {dvec3(2,0,-15), dvec3(2,2,-15),dvec3(-2,2,-15),dvec3(-2,0,-15)};
+    shared_ptr<SimplePolygon> polygon = make_shared<SimplePolygon>(vertices, GREEN);
 
+    surfaces.push_back(polygon);
     surfaces.push_back(plane);
 	surfaces.push_back(redBall);
 	surfaces.push_back(whiteBall);
 	surfaces.push_back(blackBall);
     surfaces.push_back(ellipsoid);
+    surfaces.push_back(cyl);
          
     ambientLight = make_shared<LightSource>(BLACK);
     ambientLight->ambientLightColor = color(0.15, 0.15, 0.15, 1.0f);
@@ -182,8 +212,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
 
 	// Set the initial display mode.
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA );
-
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_MULTISAMPLE );
 	// Set the initial window size
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
@@ -202,7 +231,7 @@ int main(int argc, char** argv)
 
 	// Set the color to which pixels will be cleared if there is no intersection.
     rayTrace.setDefaultColor(LIGHT_BLUE);
-
+    
 	// Callback for window redisplay
 	glutDisplayFunc(RenderSceneCB);		
 	glutReshapeFunc(ResizeCB);

@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+../source/headers/Cylinder.h
+QuadricSurface.h
+../source/headers/QuadricSurface.h
+
 ../source/headers/Defines.h
 iostream
 -
@@ -89,10 +93,14 @@ QuadricSurface.h
 ../source/headers/QuadricSurface.h
 Ellipsoid.h
 ../source/headers/Ellipsoid.h
+Cylinder.h
+../source/headers/Cylinder.h
 
 ../source/headers/Ray.h
 Defines.h
 ../source/headers/Defines.h
+HitRecord.h
+../source/headers/HitRecord.h
 
 ../source/headers/RayTracer.h
 FrameBuffer.h
@@ -122,45 +130,7 @@ Ray.h
 Material.h
 ../source/headers/Material.h
 
-/Users/tommy/Documents/graphics/Lab4/source/Defines.cpp
-Defines.h
-/Users/tommy/Documents/graphics/Lab4/source/Defines.h
-iomanip
--
-
-/Users/tommy/Documents/graphics/Lab4/source/Ellipsoid.cpp
-Ellipsoid.h
-/Users/tommy/Documents/graphics/Lab4/source/Ellipsoid.h
-
-/Users/tommy/Documents/graphics/Lab4/source/FrameBuffer.cpp
-FrameBuffer.h
-/Users/tommy/Documents/graphics/Lab4/source/FrameBuffer.h
-
-/Users/tommy/Documents/graphics/Lab4/source/Plane.cpp
-Plane.h
-/Users/tommy/Documents/graphics/Lab4/source/Plane.h
-
-/Users/tommy/Documents/graphics/Lab4/source/QuadricSurface.cpp
-QuadricSurface.h
-/Users/tommy/Documents/graphics/Lab4/source/QuadricSurface.h
-
 /Users/tommy/Documents/graphics/Lab4/source/RasterUser.cpp
 RasterUser.h
 /Users/tommy/Documents/graphics/Lab4/source/RasterUser.h
-
-/Users/tommy/Documents/graphics/Lab4/source/RayTracer.cpp
-RayTracer.h
-/Users/tommy/Documents/graphics/Lab4/source/RayTracer.h
-
-/Users/tommy/Documents/graphics/Lab4/source/SimplePolygon.cpp
-SimplePolygon.h
-/Users/tommy/Documents/graphics/Lab4/source/SimplePolygon.h
-
-/Users/tommy/Documents/graphics/Lab4/source/Sphere.cpp
-Sphere.h
-/Users/tommy/Documents/graphics/Lab4/source/Sphere.h
-
-/Users/tommy/Documents/graphics/Lab4/source/Surface.cpp
-Surface.h
-/Users/tommy/Documents/graphics/Lab4/source/Surface.h
 
