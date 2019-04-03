@@ -1,0 +1,6 @@
+-x
+c++
+-DNDEBUG
+-I/Users/tommy/Documents/graphics/lab6../glm
+-I/Users/tommy/Documents/graphics/lab6/source/headers
+-std=c++11
