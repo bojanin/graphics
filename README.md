@@ -29,6 +29,10 @@ Code clarity is focused on more than code quality for learning benefits.
 * Lab 4 & 5
     * 3d objects in scene + planes
     * shading models on top of objects (directional, positional ,spotlight)
+* Project 1
+    * Built from lab4 so it resides in the lab4 folder.
+    * Reflections, shadows, ellipsoids and polygons.
+    * Includes night/day mode. (m,n keys)
 
 ## How to run projects
 

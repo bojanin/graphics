@@ -38,7 +38,35 @@ glm/gtx/euler_angles.hpp
 Defines.h
 ../source/headers/Defines.h
 
+../source/headers/Lab.h
+Defines.h
+../source/headers/Defines.h
+FrameBuffer.h
+../source/headers/FrameBuffer.h
+ScanConversion.h
+../source/headers/ScanConversion.h
+
+../source/headers/ScanConversion.h
+Defines.h
+../source/headers/Defines.h
+FrameBuffer.h
+../source/headers/FrameBuffer.h
+
+/Users/tommy/Documents/graphics/lab6/source/Defines.cpp
+Defines.h
+/Users/tommy/Documents/graphics/lab6/source/Defines.h
+iomanip
+-
+
 /Users/tommy/Documents/graphics/lab6/source/FrameBuffer.cpp
 FrameBuffer.h
 /Users/tommy/Documents/graphics/lab6/source/FrameBuffer.h
+
+/Users/tommy/Documents/graphics/lab6/source/Lab.cpp
+Lab.h
+/Users/tommy/Documents/graphics/lab6/source/Lab.h
+
+/Users/tommy/Documents/graphics/lab6/source/ScanConversion.cpp
+ScanConversion.h
+/Users/tommy/Documents/graphics/lab6/source/ScanConversion.h
 
