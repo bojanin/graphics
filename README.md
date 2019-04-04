@@ -37,9 +37,9 @@ Code clarity is focused on more than code quality for learning benefits.
     
     ### Project 1 Images
     
-    ![shading]()
+    ![shading](https://github.com/ven1xus/graphics/blob/master/screenshots/shadows.png)
     
-    ![reflections]()
+    ![reflections](https://github.com/ven1xus/graphics/blob/master/screenshots/reflections.png)
 
 ## How to run projects
 
