@@ -5,7 +5,6 @@ FrameBuffer colorBuffer(WINDOW_WIDTH, WINDOW_HEIGHT);
 std::vector<dvec3> triangleVertices;
 std::vector<dvec3> verticalLineVertices;
 std::vector<dvec3> horizontalLineVertices;
-
 // Index of the problem currently being rendered.
 int displayedProblem = 2;
 
@@ -142,7 +141,16 @@ void problem5()
 // Rotate the triangle by negative 90 degrees by calling transformVertices.
 void problem6()
 {
+	dmat3 rotateMatrix;
 
+    rotateMatrix[0][0] = cos(PI / -2.0);
+    rotateMatrix[0][1] = -sin(PI / -2.0);
+    rotateMatrix[1][0] = sin(PI / -2.0);
+    rotateMatrix[1][1] = cos(PI / -2.0);
+
+    std::vector<dvec3> vertices = transformVertices(rotateMatrix, triangleVertices);
+
+    drawFilledTriangle(vertices, BLUE);
 
 } // end Problem6
 
@@ -152,7 +160,22 @@ void problem6()
 // position by 180 degrees. Use the transformVertices function.
 void problem7()
 {
+	dmat3 transMatrix;
+    dmat3 rotateMatrix;
 
+    transMatrix[2][0] = 200;
+    transMatrix[2][1] = 300;
+
+    rotateMatrix[0][0] = cos(PI);
+    rotateMatrix[0][1] = -sin(PI);
+    rotateMatrix[1][0] = sin(PI);
+    rotateMatrix[1][1] = cos(PI);
+
+    dmat3 endProd = transMatrix * rotateMatrix; 
+    
+    std::vector<dvec3> vertices = transformVertices(endProd, triangleVertices);
+
+    drawFilledTriangle(vertices, BLUE);
 
 
 } // end Problem7
@@ -163,11 +186,25 @@ void problem7()
 void problem8()
 {
 	static float angle = 0.0f;
+    
+    dmat3 transMatrix;
+    dmat3 rotateMatrix;
 
-	angle += 1.0f;
+    transMatrix[2][0] = 200;
+    transMatrix[2][1] = 300;
 
+    rotateMatrix[0][0] = cos(angle);
+    rotateMatrix[0][1] = -sin(angle);
 
+    rotateMatrix[1][0] = sin(angle);
+    rotateMatrix[1][1] = cos(angle);
 
+    dmat3 endProd = transMatrix * rotateMatrix; 
+
+    std::vector<dvec3> vertices = transformVertices(endProd, triangleVertices);
+
+    drawFilledTriangle(vertices, BLUE);
+	angle += 0.5f;
 } // end Problem8
 
 
@@ -175,8 +212,24 @@ void problem8()
 // direction around the origin at a distance of 400 pixels use the transformVertices function.
 void problem9()
 {
+	static float angle = 0.0f;
+    
+    dmat3 transMatrix;
+    dmat3 rotateMatrix;
 
+    transMatrix[2][0] = 400;
 
+    rotateMatrix[0][0] = cos(angle);
+    rotateMatrix[0][1] = -sin(angle);
+
+    rotateMatrix[1][0] = sin(angle);
+    rotateMatrix[1][1] = cos(angle);
+
+    std::vector<dvec3> vertices = transformVertices(transMatrix, triangleVertices);
+    vertices = transformVertices(rotateMatrix, vertices);
+
+    drawFilledTriangle(vertices, BLUE);
+    angle += 0.01;
 } // end Problem9
 
 
@@ -186,6 +239,35 @@ void problem9()
 // the transformVertices function.
 void problem10() {
 
+	static float angle = 0.0f;
+    
+    dmat3 transMatrix;
+    dmat3 rotateMatrix;
+    dmat3 reverse;
+
+    // 400 degrees
+    transMatrix[2][0] = 400;
+
+    //point up
+    reverse[0][0] = cos(-angle);
+    reverse[0][1] = -sin(-angle);
+    reverse[1][0] = sin(-angle);
+    reverse[1][1] = cos(-angle);
+
+//rotates ti
+    rotateMatrix[0][0] = cos(angle);
+    rotateMatrix[0][1] = -sin(angle);
+    rotateMatrix[1][0] = sin(angle);
+    rotateMatrix[1][1] = cos(angle);
+
+    dmat3 endProd = transMatrix * reverse;
+
+    std::vector<dvec3> vertices = transformVertices(endProd, triangleVertices);
+    vertices = transformVertices(rotateMatrix, vertices);
+
+    drawFilledTriangle(vertices, BLUE);
+
+    angle += 0.01;
 
 
 } // end Problem10
@@ -200,8 +282,30 @@ void problem10() {
 void problem11()
 {
 
+	static double horizontalAngle = 0;
+    static double verticalAngle = 0;
+    static bool isHorizontal = true;
+    static bool isVertical = true;
 
+    dmat3 transMatrix;
 
+    transMatrix[2][0] = horizontalAngle;
+    transMatrix[2][1] = verticalAngle;
+
+    std::vector<dvec3> vertices = transformVertices(transMatrix, triangleVertices);
+
+    drawFilledTriangle(vertices, BLUE);
+
+    if (verticalAngle > WINDOW_HEIGHT || verticalAngle < -WINDOW_HEIGHT) {
+        isVertical = !isVertical;
+    }
+    if (horizontalAngle > WINDOW_WIDTH || horizontalAngle < -WINDOW_WIDTH) {
+        isHorizontal = !isHorizontal;
+    }
+
+    isVertical ? verticalAngle += 5.0 : verticalAngle -= 5.0;
+    isHorizontal ? horizontalAngle  += 10.0 : horizontalAngle -= 10.0;
+    
 } // end Problem11
 
 

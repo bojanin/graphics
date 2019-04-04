@@ -53,7 +53,7 @@ const int WINDOW_HEIGHT = 316; // Default window height in pixels = width/1.618
 const double EPSILON = 1.0E-4;
 
 // Define pi as type double.
-//const double M_PI = glm::pi<double>( );
+const double PI = glm::pi<double>( );
 
 // Allow reference to vec4 as a "color"
 typedef glm::dvec4 color;
