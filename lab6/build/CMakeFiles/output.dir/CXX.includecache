@@ -27,6 +27,10 @@ glm/gtc/constants.hpp
 -
 glm/gtc/quaternion.hpp
 -
+glm/ext.hpp
+../source/headers/glm/ext.hpp
+glm/gtx/string_cast.hpp
+../source/headers/glm/gtx/string_cast.hpp
 glm/gtx/transform.hpp
 -
 glm/gtx/quaternion.hpp
@@ -52,21 +56,7 @@ Defines.h
 FrameBuffer.h
 ../source/headers/FrameBuffer.h
 
-/Users/tommy/Documents/graphics/lab6/source/Defines.cpp
-Defines.h
-/Users/tommy/Documents/graphics/lab6/source/Defines.h
-iomanip
--
-
-/Users/tommy/Documents/graphics/lab6/source/FrameBuffer.cpp
-FrameBuffer.h
-/Users/tommy/Documents/graphics/lab6/source/FrameBuffer.h
-
 /Users/tommy/Documents/graphics/lab6/source/Lab.cpp
 Lab.h
 /Users/tommy/Documents/graphics/lab6/source/Lab.h
-
-/Users/tommy/Documents/graphics/lab6/source/ScanConversion.cpp
-ScanConversion.h
-/Users/tommy/Documents/graphics/lab6/source/ScanConversion.h
 

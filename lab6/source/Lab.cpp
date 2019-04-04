@@ -44,7 +44,14 @@ void problem1()
     a[0][0] = 3; a[1][0] = 7; a[2][0] = 2;
     a[0][1] = 2; a[1][1] = -4; a[2][1] = -3;
     a[0][2] = 5; a[1][2] = 2; a[2][2] = 1;
-    
+    dvec3 v(4, -1, 1);
+
+    glm::mat3 inverse_a = glm::inverse(a);
+
+    dvec3 y = inverse_a * v;
+
+    std::cout << y << endl; 
+        
 
 
 
@@ -79,8 +86,8 @@ void problem2()
 	
 	std::vector<dvec3> transformedVert;
 
-	//trans[2][0] = 300;
-	//trans[2][1] = 250;
+	trans[2][0] = 300;
+	trans[2][1] = 250;
 
 	transformedVert = transformVertices(trans, triangleVertices);
 
@@ -92,6 +99,13 @@ void problem2()
 // original size by calling transformVertices.
 void problem3()
 {
+    glm::dmat3 scaleMatrix;
+
+    scaleMatrix[0][0] = 0.75;
+    scaleMatrix[1][1] = 0.75;
+    
+    std::vector<dvec3> vertices = transformVertices(scaleMatrix, triangleVertices);
+    drawFilledTriangle(vertices, BLUE); 
 
 
 } // end Problem3
@@ -100,9 +114,12 @@ void problem3()
 // by calling transformVertices.
 void problem4()
 {
+    dmat3 reflectionMatrix;
 
-
-
+    reflectionMatrix[0][0] = 1;
+    reflectionMatrix[1][1] = -1;
+    std::vector<dvec3> vertices = transformVertices(reflectionMatrix, triangleVertices);
+    drawFilledTriangle(vertices, BLUE);
 } // end Problem4
 
 
@@ -112,7 +129,12 @@ void problem4()
 void problem5()
 {
 
+    dmat3 shearMatrix;
+    // x direction multiplier
+    shearMatrix[1][0] = 3;
+    std::vector<dvec3> vertices = transformVertices(shearMatrix, triangleVertices);
 
+    drawFilledTriangle(vertices, BLUE);
 
 
 } // end Problem5

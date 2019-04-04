@@ -16,7 +16,6 @@
 
 // Basic GLM functionality
 #include "glm/glm.hpp"
-
 // Stable glm extensions
 // https://glm.g-truc.net/0.9.9/api/a01364.html
 #include <glm/gtc/matrix_transform.hpp>
@@ -29,7 +28,8 @@
 
 // Allows experimental extensions of glm to be used
 #define GLM_ENABLE_EXPERIMENTAL
-
+#include "glm/ext.hpp"
+#include "glm/gtx/string_cast.hpp"
 // For simple scale, rotate, and translate functions
 // https://glm.g-truc.net/0.9.9/api/a00596.html
 #include <glm/gtx/transform.hpp>
