@@ -20,7 +20,35 @@ Pyramid::Pyramid( color pyColor, double width, double height)
 	triangleVertices.push_back(VertexData(v1, c, n));
 	triangleVertices.push_back(VertexData(v2, c, n));
 
-	// TODO
+    n = dvec4(findUnitNormal(v0.xyz, v2.xyz, v3.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v0, c, n));
+    triangleVertices.push_back(VertexData(v2, c, n));
+    triangleVertices.push_back(VertexData(v3, c, n));
+
+    n = dvec4(findUnitNormal(v0.xyz, v3.xyz, v4.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v0, c, n));
+    triangleVertices.push_back(VertexData(v3, c, n));
+    triangleVertices.push_back(VertexData(v4, c, n));
+
+    n = dvec4(findUnitNormal(v0.xyz, v4.xyz, v1.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v0, c, n));
+    triangleVertices.push_back(VertexData(v4, c, n));
+    triangleVertices.push_back(VertexData(v1, c, n));
+
+    n = dvec4(findUnitNormal(v1.xyz, v2.xyz, v3.xyz), 0.0);
+                                                    
+    triangleVertices.push_back(VertexData(v1, c, n));
+    triangleVertices.push_back(VertexData(v2, c, n));
+    triangleVertices.push_back(VertexData(v3, c, n));
+                                                    
+    n = dvec4(findUnitNormal(v3.xyz, v4.xyz, v1.xyz), 0.0);
+                                                   
+    triangleVertices.push_back(VertexData(v3, c, n));
+    triangleVertices.push_back(VertexData(v4, c, n));
+    triangleVertices.push_back(VertexData(v1, c, n));
 }
 
 
