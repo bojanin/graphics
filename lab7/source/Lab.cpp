@@ -28,13 +28,12 @@ ReferencePlane referencePlane;
 double angle = glm::radians(45.0);
 
 /********************** END GLOBALS ******************************/
-    //scaling per intrusctions
-    glm::dmat4 scaleModel;
-    scaleModel[0][0] = 2.0;
-    scaleModel[1][1] = 2.0;
 
 void renderObjects()
 {
+    glm::dmat4 scalar;
+    scalar[0][0] = 2.0;
+    scalar[1][1] = 2.0;
 	// Set Modeling transformation for the reference plane
 	PerVertex::modelingTransformation = glm::translate(dvec3(0.0, -3.0, 0.0));
 
