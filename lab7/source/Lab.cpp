@@ -37,6 +37,7 @@ void renderObjects()
     glm::dmat4 scalar;
     scalar[0][0] = 2.0;
     scalar[1][1] = 2.0;
+    scalar[2][2] = 2.0;
 	// Set Modeling transformation for the reference plane
 	PerVertex::modelingTransformation = glm::translate(dvec3(0.0, -3.0, 0.0));
 
@@ -57,6 +58,8 @@ void renderObjects()
     PerVertex::processTriangleVertices(twoPyr.triangleVertices);
     PerVertex::modelingTransformation = glm::rotate(-angle, dvec3(0.0, 1.0, 0.0)) * glm::translate(dvec3(10.0, 3.0, 0.0)) * glm::rotate(angle, dvec3(1.0, 0.0, 0.0));
     PerVertex::processTriangleVertices(rotatePyr.triangleVertices);
+    PerVertex::modelingTransformation = glm::translate(dvec3(3.0, 0.0, 0.0)) * glm::rotate(angle, dvec3(1.0, 0.0, 0.0));
+    PerVertex::processTriangleVertices(rightPyr.triangleVertices);
 }
 
 
@@ -194,20 +197,19 @@ void viewMenu( int value )
 			break;
 
 		case( 3 ):
-            PerVertex::viewingTransformation = glm::rotate(glm::translate( glm::vec3( 0.0f, 0.0f, -14.0 ) ),
-                                                glm::radians(90.0f), glm::vec3(1.0f,1.0f, 1.0)); 
+            PerVertex::viewingTransformation = glm::rotate(glm::rotate(glm::translate(glm::vec3( 0.0f, 0.0f, -14.0 )) , glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0)), glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
 			break;
 		case( 4 ):
-
-			// TODO
+            PerVertex::viewingTransformation = glm::lookAt(dvec3(0.0, 0.0, 14.0), dvec3(0.0, 0.0, 0.0), dvec3(0.0, 1.0, 0.0)); 
 			break;
 		case( 5 ):
-
-			// TODO
+            {
+            double diff = 7 * sqrt(2);
+            PerVertex::viewingTransformation = glm::lookAt(dvec3(0.0, diff, diff), dvec3(0.0, 0.0, 0.0), dvec3(0.0, 0.5, 0.0)); 
 			break;
+            }
 		case( 6 ):
-
-			// TODO
+            PerVertex::viewingTransformation = glm::lookAt(dvec3(0.0, 14.0, 0.0), dvec3(0.0, 0.0, 0.0), dvec3(1.0, 0., 0.0)); 
 			break;
 		default:
 			std::cout << "Invalid view selection " << std::endl;
@@ -217,21 +219,6 @@ void viewMenu( int value )
 	glutPostRedisplay( );
 
 } // end viewMenu
-void rotateObjectsInScene(int x, int y, int z) {
-
-    // Pyramid redPyramid(color(1.0, 0.0, 0.0, 0.5f), 1.0, 1.0 );
-    //Sphere rightPyr(MAGENTA,1);
-    //Pyramid leftPyr(BLUE, 1, 2);
-    //Pyramid twoPyr(WHITE, 1.0, 1.0);
-    //Pyramid rotatePyr(BLACK, 1.0, 1.0);
-    
-    PerVertex::modelingTransformation = glm::translate(dvec3(0.0, 0.0, 0.0)) * glm::rotate(angle, dvec3(x,y,z));
-    PerVertex::processTriangleVertices(rightPyr.triangleVertices);
-    PerVertex::processTriangleVertices(leftPyr.triangleVertices);
-    PerVertex::processTriangleVertices(twoPyr.triangleVertices);
-    PerVertex::processTriangleVertices(twoPyr.triangleVertices);
-    PerVertex::processTriangleVertices(rotatePyr.triangleVertices);
-}
 
 
 // Responds to presses of the arrow keys
@@ -242,23 +229,29 @@ static void SpecialKeysCB(int key, int x, int y)
 	switch (key) {
 
 	case(GLUT_KEY_RIGHT) :
-        rotateObjectsInScene(1, 0, 0);
+        --rotationY;
 		break;
 	case(GLUT_KEY_LEFT) :
-        rotateObjectsInScene(-1, 0, 0);
-
+        ++rotationY;
 		break;
 	case(GLUT_KEY_UP) :
-        rotateObjectsInScene(0, 1, 0); 
+        ++rotationX;
 		break;
 	case(GLUT_KEY_DOWN) :
-        rotateObjectsInScene(0, -1, 0);
+        --rotationX;
 		break;
 
 	default:
 		std::cout << key << " key pressed." << std::endl;
 	}
 
+glm::dmat4 transView = glm::translate(glm::vec3(0.0f, 0.0f, zTrans));
+glm::dmat4 rotateViewX = glm::rotate(glm::radians(rotationX), 
+   glm::vec3(1.0f, 0.0f, 0.0f));
+glm::dmat4 rotateViewY = glm::rotate(glm::radians(rotationY), 
+   glm::vec3(0.0f, 1.0f, 0.0f));
+
+PerVertex::viewingTransformation = transView * rotateViewX * rotateViewY;
 	glutPostRedisplay();
 
 } // end SpecialKeysCB
