@@ -27,5 +27,22 @@ struct Pyramid
 };
 
 
+struct Sphere {
+    Sphere(color col, double radius = 0.5f, int slices = 16, int stacks = 16);
 
+    Material material;
+    std::vector<VertexData> triangleVertices;
+
+    protected:
+    void initializeTop();
+    void initializeBody();
+    void initializeBottom();
+    
+    int stacks, slices;
+    double radius;      
+
+    std::vector<double> stackAngles;
+    std::vector<double> sliceAngles;
+
+};
 

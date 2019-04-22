@@ -16,7 +16,7 @@ FrameBuffer frameBuffer(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 // Pyramid
 Pyramid redPyramid(color(1.0, 0.0, 0.0, 0.5f), 1.0, 1.0 );
-Pyramid rightPyr(MAGENTA,1, 1);
+Sphere rightPyr(MAGENTA,1);
 Pyramid leftPyr(BLUE, 1, 2);
 Pyramid twoPyr(WHITE, 1.0, 1.0);
 Pyramid rotatePyr(BLACK, 1.0, 1.0);
@@ -26,6 +26,9 @@ ReferencePlane referencePlane;
 
 // Global to hold the rotation angle of objects in the scene
 double angle = glm::radians(45.0);
+double zTrans = -14.0f;
+float rotationX = 0.0f; 
+float rotationY = 0.0f;
 
 /********************** END GLOBALS ******************************/
 
@@ -45,7 +48,7 @@ void renderObjects()
 	PerVertex::processTriangleVertices(redPyramid.triangleVertices);
     PerVertex::modelingTransformation = glm::translate(dvec3(3.0, 0.0, 0.0)) * glm::rotate(angle, dvec3(1.0, 0.0, 0.0));
     PerVertex::processTriangleVertices(rightPyr.triangleVertices);
-    PerVertex::modelingTransformation = glm::translate(dvec3(-3.0, 0.0, 0.0)) * glm::scale(scaleModel, dvec3(1.0, 1.0, 1.0)) * glm::rotate(angle, dvec3(0.0, 0.0, 1.0));
+    PerVertex::modelingTransformation = glm::translate(dvec3(-3.0, 0.0, 0.0)) * glm::scale(scalar, dvec3(1.0, 1.0, 1.0)) * glm::rotate(angle, dvec3(0.0, 0.0, 1.0));
     PerVertex::processTriangleVertices(leftPyr.triangleVertices);
     
     PerVertex::modelingTransformation = glm::translate(dvec3( -3.5, -2.5, 3.5));
@@ -53,7 +56,7 @@ void renderObjects()
     PerVertex::modelingTransformation = glm::translate(dvec3(3.5, -2.5, -3.5));
     PerVertex::processTriangleVertices(twoPyr.triangleVertices);
     PerVertex::modelingTransformation = glm::rotate(-angle, dvec3(0.0, 1.0, 0.0)) * glm::translate(dvec3(10.0, 3.0, 0.0)) * glm::rotate(angle, dvec3(1.0, 0.0, 0.0));
-    PerVertex::processTriangleVertices(WHITE.triangleVertices);
+    PerVertex::processTriangleVertices(rotatePyr.triangleVertices);
 }
 
 
@@ -136,15 +139,99 @@ static void KeyboardCB(unsigned char key, int x, int y)
 	case(27) : // Escape key
 		//glutLeaveMainLoop();
 		break;
+    case('w'):
+        ++zTrans;
+        break;
+    case ('s'):
+        --zTrans;
+        break;
 
 	default:
 		std::cout << key << " key pressed." << std::endl;
 	}
 
+glm::mat4 transView = glm::translate(glm::vec3(0.0f, 0.0f, zTrans));
+glm::mat4 rotateViewX = glm::rotate(glm::radians(rotationX), glm::vec3(1.0f, 0.0f, 0.0f));
+glm::mat4 rotateViewY = glm::rotate(glm::radians(rotationY), glm::vec3(0.0f, 1.0f, 0.0f));
+
+PerVertex::viewingTransformation = transView * rotateViewX * rotateViewY;
 
 	glutPostRedisplay();
 
 } // end KeyboardCB
+
+void polygonRenderMenu( int value )
+{
+    switch( value ) {
+
+        case( 0 ):
+
+            PerVertex::polygonRenderMode = FILL;
+            break;
+        case( 1 ):
+
+            PerVertex::polygonRenderMode = LINE;
+            break;
+
+        default:
+            std::cout << "Invalid polygon render selection " << std::endl;
+    }
+
+    // Signal GLUT to call display callback
+    glutPostRedisplay( );
+
+} // end polygonRenderMenu
+
+
+void viewMenu( int value )
+{
+	switch( value ) {
+		case( 1 ):
+			PerVertex::viewingTransformation = glm::translate( glm::vec3( 0.0f, 0.0f, -14.0 ) );
+			break;
+		case( 2 ):
+            PerVertex::viewingTransformation = glm::rotate(glm::translate( glm::vec3( 0.0f, 0.0f, -14.0 ) ),glm::radians(45.0f), glm::vec3(1.0f, 0.0f, 0.0)); 
+			break;
+
+		case( 3 ):
+            PerVertex::viewingTransformation = glm::rotate(glm::translate( glm::vec3( 0.0f, 0.0f, -14.0 ) ),
+                                                glm::radians(90.0f), glm::vec3(1.0f,1.0f, 1.0)); 
+			break;
+		case( 4 ):
+
+			// TODO
+			break;
+		case( 5 ):
+
+			// TODO
+			break;
+		case( 6 ):
+
+			// TODO
+			break;
+		default:
+			std::cout << "Invalid view selection " << std::endl;
+	}
+
+	// Signal GLUT to call display callback
+	glutPostRedisplay( );
+
+} // end viewMenu
+void rotateObjectsInScene(int x, int y, int z) {
+
+    // Pyramid redPyramid(color(1.0, 0.0, 0.0, 0.5f), 1.0, 1.0 );
+    //Sphere rightPyr(MAGENTA,1);
+    //Pyramid leftPyr(BLUE, 1, 2);
+    //Pyramid twoPyr(WHITE, 1.0, 1.0);
+    //Pyramid rotatePyr(BLACK, 1.0, 1.0);
+    
+    PerVertex::modelingTransformation = glm::translate(dvec3(0.0, 0.0, 0.0)) * glm::rotate(angle, dvec3(x,y,z));
+    PerVertex::processTriangleVertices(rightPyr.triangleVertices);
+    PerVertex::processTriangleVertices(leftPyr.triangleVertices);
+    PerVertex::processTriangleVertices(twoPyr.triangleVertices);
+    PerVertex::processTriangleVertices(twoPyr.triangleVertices);
+    PerVertex::processTriangleVertices(rotatePyr.triangleVertices);
+}
 
 
 // Responds to presses of the arrow keys
@@ -155,16 +242,17 @@ static void SpecialKeysCB(int key, int x, int y)
 	switch (key) {
 
 	case(GLUT_KEY_RIGHT) :
-
+        rotateObjectsInScene(1, 0, 0);
 		break;
 	case(GLUT_KEY_LEFT) :
+        rotateObjectsInScene(-1, 0, 0);
 
 		break;
 	case(GLUT_KEY_UP) :
-
+        rotateObjectsInScene(0, 1, 0); 
 		break;
 	case(GLUT_KEY_DOWN) :
-
+        rotateObjectsInScene(0, -1, 0);
 		break;
 
 	default:
@@ -225,7 +313,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	// Create a window using a string and make it the current window.
-	GLuint world_Window = glutCreateWindow("Modeling Tranformations");
+	GLuint world_Window = glutCreateWindow("Viewing Transformations");
 
 	// Indicate to GLUT that the flow of control should return to the program after
 	// the window is closed and the GLUTmain loop is exited.
@@ -238,9 +326,32 @@ int main(int argc, char** argv)
 	glutSpecialFunc(SpecialKeysCB);
 	glutIdleFunc(animate);
 
+
+	// Create polygon render submenu
+	int polyMenuid = glutCreateMenu(polygonRenderMenu);
+	// Specify menu items and integer identifiers
+	glutAddMenuEntry( "Fill", 0 );
+	glutAddMenuEntry( "Line", 1 );
+
+// Create view submenu
+	int viewMenuid = glutCreateMenu( viewMenu );
+	// Specify menu items and integer identifiers
+	glutAddMenuEntry( "View 1", 1 );
+	glutAddMenuEntry( "View 2", 2 );
+	glutAddMenuEntry( "View 3", 3 );
+	glutAddMenuEntry( "View 4", 4 );
+	glutAddMenuEntry( "View 5", 5 );
+	glutAddMenuEntry( "View 6", 6 );
+
 	// Create main submenu
-	int menu1id = glutCreateMenu(mainMenu);
-	glutAddMenuEntry("Quit", 0);
+	int menu1id = glutCreateMenu( mainMenu );
+	glutAddSubMenu( "Render", polyMenuid );
+	glutAddSubMenu( "View", viewMenuid );
+	glutAddMenuEntry( "Quit", 0 );
+
+	// Attach menu to right mouse button
+	glutAttachMenu( GLUT_RIGHT_BUTTON );
+	// Create main submenu
 
 	// Attach menu to right mouse button
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
