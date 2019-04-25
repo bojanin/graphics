@@ -29,8 +29,18 @@ std::vector<ClippingPlane> PerVertex::ndcPlanes{ ClippingPlane(dvec3(0, 1, 0), d
 
 void PerVertex::applyLighting( std::vector<VertexData> & worldCoords )
 {
-	//TODO
-
+    for(auto wCoord : worldCoords) {
+            
+        double alpha = wCoord.material.diffuseColor.a;
+        color totalLight = wCoord.material.emissiveColor;
+        for(auto light : lights) {
+            totalLight += light->illuminate(PerVertex::eyePositionInWorldCoords,
+                                            wCoord.worldPosition,
+                                            wCoord.worldNormal,
+                                            wCoord.material);
+        }
+        wCoord.shadedColor = totalLight;
+    }
 } // end applyLighting
 
 //********************************** Vertex Transformation *********************************

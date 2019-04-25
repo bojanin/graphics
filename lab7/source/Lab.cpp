@@ -30,6 +30,8 @@ double zTrans = -14.0f;
 float rotationX = 0.0f; 
 float rotationY = 0.0f;
 
+enum View_Type { FULL_SCREEN, VERTICAL_SPLIT, HORIZONTAL_SPLIT };
+View_Type view = FULL_SCREEN;
 /********************** END GLOBALS ******************************/
 
 void renderObjects()
@@ -63,6 +65,89 @@ void renderObjects()
 }
 
 
+dmat4 myPerspective(double fovy, double aspect, double near, double far) {
+    dmat4 mat;
+    //return glm::perspective(fovy, aspect, near, far);
+    double y = 1.0 / glm::tan((M_PI / 180.0) * fovy / 2);
+    double x = y / aspect;
+    mat[0][0] = x;
+    mat[1][1] = y;
+    mat[2][2] = (near + far) / (near - far);
+    mat[3][2] = (2.0 * far * near) / (near - far);
+    mat[2][3] = -1;
+    return mat;
+}
+
+dmat4 myOrtho(double left, double right, double bottom, double top, double near, double far) {
+    dmat4 mat;
+
+    mat[0][0] = 2.0 / (right - left);
+    mat[1][1] = 2.0 / (top - bottom);
+    mat[2][2] = -2.0 / (far - near);
+    mat[3][3] = 1;
+
+    mat[3][0] = -((right + left) / (right - left));
+    mat[3][1] = -((top + bottom) / (top - bottom));
+    mat[3][2] = -((far + near) / (far - near));
+    
+    return mat;
+}
+
+// Draws two views of the scene. One on the right and one on the left.
+void twoViewsSplitVertically()
+{
+	// Render left side view
+    double viewportWidth = (PerVertex::xViewportMax-PerVertex::xViewportMin)/2.0;
+	double viewportHeight = (PerVertex::yViewportMax - PerVertex::yViewportMin);
+
+	PerVertex::projectionTransformation = myPerspective(45.0, 
+    ((double)viewportWidth) / ((double)viewportHeight), 0.1f, 100.0);
+	// Set viewport transformation for left view
+	PerVertex::viewportTransformation =
+		glm::translate(dvec3(0.0, 0.0, 0.0)) *
+		glm::scale(dvec3((double)(viewportWidth)/(PerVertex::xNdcMax-
+        PerVertex::xNdcMin),
+		(double)(viewportHeight)/(PerVertex::yNdcMax-PerVertex::yNdcMin),1.0)) *
+		glm::translate(dvec3(-PerVertex::xNdcMin, -PerVertex::yNdcMin, 0.0));
+
+	renderObjects();
+
+    PerVertex::projectionTransformation = myOrtho(-8.0, 8.0, -6.0, 6.0, 1.0, 100.0);
+	PerVertex::viewportTransformation =
+		glm::translate(dvec3(4.0, 0.0, 0.0)) *
+		glm::scale(dvec3((double)(viewportWidth)/(PerVertex::xNdcMax-
+        PerVertex::xNdcMin),
+		(double)(viewportHeight)/(PerVertex::yNdcMax-PerVertex::yNdcMin),1.0)) *
+		glm::translate(dvec3(3, -PerVertex::yNdcMin, 0.0));
+
+	renderObjects();
+} // end twoViewsSplitVertically
+
+void twoViewsSplitHorizontally() {
+	// Render left side view
+    double viewportWidth = (PerVertex::xViewportMax-PerVertex::xViewportMin);
+	double viewportHeight = (PerVertex::yViewportMax - PerVertex::yViewportMin)/ 2.0;
+
+	PerVertex::projectionTransformation = myPerspective(45.0, 
+    ((double)viewportWidth) / ((double)viewportHeight), 0.1f, 100.0);
+
+	PerVertex::viewportTransformation =
+		glm::translate(dvec3(0.0, 0.0, 0.0)) *
+		glm::scale(dvec3((double)(viewportWidth)/(PerVertex::xNdcMax-
+        PerVertex::xNdcMin),
+		(double)(viewportHeight)/(PerVertex::yNdcMax-PerVertex::yNdcMin),1.0)) *
+		glm::translate(dvec3(-PerVertex::xNdcMin, -PerVertex::yNdcMin, 0.0));
+	renderObjects();
+
+    PerVertex::projectionTransformation = myOrtho(-8.0, 8.0, -6.0, 6.0, 1.0, 100.0);
+	PerVertex::viewportTransformation =
+		glm::translate(dvec3(0.0, 4.0, 0.0)) *
+		glm::scale(dvec3((double)(viewportWidth)/(PerVertex::xNdcMax-
+        PerVertex::xNdcMin),
+		(double)(viewportHeight)/(PerVertex::yNdcMax-PerVertex::yNdcMin),1.0)) *
+		glm::translate(dvec3(-PerVertex::xNdcMin, 3.0, 0.0));
+	renderObjects();
+}
 /**
 * Acts as the display function for the window.
 */
@@ -88,13 +173,23 @@ static void RenderSceneCB()
 		// Determine the position of the viewpoint in world coordinates
 		PerVertex::eyePositionInWorldCoords = glm::inverse(PerVertex::viewingTransformation)[3].xyz;
 
-		renderObjects();
-
+        switch(view) {
+            case VERTICAL_SPLIT:
+                twoViewsSplitVertically();
+                break;
+            case HORIZONTAL_SPLIT:
+                // TODO
+                twoViewsSplitHorizontally();
+                break;
+            default:
+                renderObjects(); 
+        }
 		// Display the color buffer
 		frameBuffer.showColorBuffer();
 	}
 
 } // end RenderSceneCB
+
 
 // Reset viewport limits for full window rendering each time the window is resized.
 // This function is called when the program starts up and each time the window is 
@@ -111,7 +206,7 @@ static void ResizeCB(int width, int height)
 	PerVertex::yViewportMax = (double)height;
 
 	// Create a perspective projection matrix. glm::perspective vertical field of view is specifed in degrees.
-	PerVertex::projectionTransformation = glm::perspective( 45.0, ( (double)PerVertex::xViewportMax - PerVertex::xViewportMin ) /
+	PerVertex::projectionTransformation = myPerspective( 45.0, ( (double)PerVertex::xViewportMax - PerVertex::xViewportMin ) /
 		( (double)PerVertex::yViewportMax - PerVertex::yViewportMin ), 1.0, 50.0 );
 		
 	// Set viewport transformation
@@ -185,6 +280,46 @@ void polygonRenderMenu( int value )
 
 } // end polygonRenderMenu
 
+void viewPortMenu(int value)
+{
+	switch (value) {
+
+	case(0):
+
+		// "Quit" selected on the menu
+		//glutLeaveMainLoop();
+		break;
+	case(1):
+
+		view = FULL_SCREEN;
+
+		ResizeCB((int)PerVertex::xViewportMax,
+			(int)PerVertex::yViewportMax);
+
+		break;
+
+	case(2):
+
+		view = VERTICAL_SPLIT;
+		std::cout << "vertical" << std::endl;
+		break;
+
+	case(3):
+
+		view = HORIZONTAL_SPLIT;
+
+		std::cout << "horizontal" << std::endl;
+
+		break;
+
+	default:
+		std::cout << "Invalid view selection " << std::endl;
+	}
+
+	// Signal GLUT to call display callback
+	glutPostRedisplay();
+
+} // end viewPortMenu
 
 void viewMenu( int value )
 {
@@ -306,7 +441,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	// Create a window using a string and make it the current window.
-	GLuint world_Window = glutCreateWindow("Viewing Transformations");
+	GLuint world_Window = glutCreateWindow("Projection and Viewport Transformations");
 
 	// Indicate to GLUT that the flow of control should return to the program after
 	// the window is closed and the GLUTmain loop is exited.
@@ -336,10 +471,17 @@ int main(int argc, char** argv)
 	glutAddMenuEntry( "View 5", 5 );
 	glutAddMenuEntry( "View 6", 6 );
 
+	int viewportMenuid = glutCreateMenu(viewPortMenu);
+	// Specify menu items and integer identifiers
+	glutAddMenuEntry("Full Screen", 1);
+	glutAddMenuEntry("Vertical Split", 2);
+	glutAddMenuEntry("Horizontal Split", 3);
+    
 	// Create main submenu
 	int menu1id = glutCreateMenu( mainMenu );
 	glutAddSubMenu( "Render", polyMenuid );
 	glutAddSubMenu( "View", viewMenuid );
+    glutAddSubMenu("ViewPort", viewportMenuid);
 	glutAddMenuEntry( "Quit", 0 );
 
 	// Attach menu to right mouse button
