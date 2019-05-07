@@ -7,7 +7,7 @@ dmat4 PerVertex::projectionTransformation;
 dmat4 PerVertex::viewportTransformation;
 dvec3 PerVertex::eyePositionInWorldCoords;
 
-bool PerVertex::perVertexLightingEnabled = false;
+bool PerVertex::perVertexLightingEnabled = true;
 Render_Mode PerVertex::polygonRenderMode = FILL;
 
 // static Nnrmalized device coordinate horizontal and vertical limits
@@ -29,7 +29,10 @@ std::vector<ClippingPlane> PerVertex::ndcPlanes{ ClippingPlane(dvec3(0, 1, 0), d
 
 void PerVertex::applyLighting( std::vector<VertexData> & worldCoords )
 {
-    for(auto wCoord : worldCoords) {
+    for (auto p : ndcPlanes) {
+
+    }
+    for(auto &wCoord : worldCoords) {
             
         double alpha = wCoord.material.diffuseColor.a;
         color totalLight = wCoord.material.emissiveColor;
@@ -40,8 +43,96 @@ void PerVertex::applyLighting( std::vector<VertexData> & worldCoords )
                                             wCoord.material);
         }
         wCoord.shadedColor = totalLight;
+        wCoord.material.diffuseColor.a = alpha;
     }
 } // end applyLighting
+
+
+// Break general convex polygons into triangles.
+std::vector<VertexData> PerVertex::triangulate(const std::vector<VertexData> & poly)
+{
+	std::vector<VertexData> triangles;
+	triangles.push_back(poly[0]);
+	triangles.push_back(poly[1]);
+	triangles.push_back(poly[2]);
+
+	for (unsigned int i = 2; i < poly.size() - 1; i++) {
+
+		triangles.push_back(poly[0]);
+		triangles.push_back(poly[i]);
+		triangles.push_back(poly[i + 1]);
+	}
+
+	return triangles;
+
+} // end triangulate
+
+std::vector<VertexData> PerVertex::clipPolygon(const std::vector<VertexData> & clipCoords)
+{
+	std::vector<VertexData> ndcCoords;
+
+	if (clipCoords.size()>2) {
+
+		std::vector<VertexData> polygon;
+
+		for (unsigned int i = 0; i<clipCoords.size() - 2; i += 3) {
+
+			polygon.push_back(clipCoords[i]);
+			polygon.push_back(clipCoords[i + 1]);
+			polygon.push_back(clipCoords[i + 2]);
+
+			for (ClippingPlane plane : ndcPlanes) {
+				polygon = clipAgainstPlane(polygon, plane);
+			}
+
+			if (polygon.size() > 3) {
+				polygon = triangulate(polygon);
+			}
+
+			for (VertexData v : polygon) {
+				ndcCoords.push_back(v);
+			}
+			polygon.clear();
+		}
+	}
+
+	return ndcCoords;
+
+}
+
+std::vector<VertexData> PerVertex::clipAgainstPlane(std::vector<VertexData> & verts, ClippingPlane & plane)
+{
+	std::vector<VertexData> output;
+
+	if (verts.size() > 2) {
+
+		verts.push_back(verts[0]);
+
+		for (unsigned int i = 1; i < verts.size(); i++) {
+
+			bool v0In = plane.insidePlane(verts[i - 1]);
+			bool v1In = plane.insidePlane(verts[i]);
+
+			if (v0In && v1In) {
+
+				output.push_back(verts[i]);
+			}
+			else if (v0In || v1In) {
+
+				VertexData I = plane.findIntersection(verts[i - 1], verts[i]);
+				output.push_back(I);
+
+				if (!v0In && v1In) {
+
+					output.push_back(verts[i]);
+				}
+			}
+		}
+	}
+
+	return output;
+
+} // end clipAgainstPlane
 
 //********************************** Vertex Transformation *********************************
 
@@ -125,8 +216,7 @@ void PerVertex::processTriangleVertices(const std::vector<VertexData> & objectCo
   	}
   
 	// Backface Cullling
-  	//TODO
-  
+    clipCoords = removeBackwardFacingTriangles(clipCoords); 
   	// Clipping
 	//TODO
 	std::vector<VertexData> ndcCoords = clipCoords;
@@ -146,6 +236,25 @@ void PerVertex::processTriangleVertices(const std::vector<VertexData> & objectCo
 } // end processTriangleVertices
   
 //********************************** Line Segment Pipeline *********************************
+
+ std::vector<VertexData> PerVertex::removeBackwardFacingTriangles(const std::vector<VertexData> & triangleVerts) {
+    std::vector<VertexData> forwardFacingTriangles;
+    
+    const dvec3 viewDirection(0.0, 0.0, -1.0);
+    
+    for(unsigned int i = 0; i < triangleVerts.size() - 2; i += 3) {
+       dvec3 normal = findUnitNormal(triangleVerts[i].position.xyz,
+               triangleVerts[i+1].position.xyz, triangleVerts[i+2].position.xyz);
+        if (glm::dot(viewDirection, normal) <= 0.0) {
+            forwardFacingTriangles.push_back(triangleVerts[i]);
+            forwardFacingTriangles.push_back(triangleVerts[i+1]);
+            forwardFacingTriangles.push_back(triangleVerts[i+2]);
+        }
+    }
+
+
+    return forwardFacingTriangles;
+ }
 
 // Tranforms line segments from world to view port coordinate via eye, clip, and normalized device coordinates. 
 // Vertices are clipped . Lighting calculations are performed in World coordinates.

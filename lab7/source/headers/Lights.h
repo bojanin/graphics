@@ -74,11 +74,16 @@ struct PositionalLight : public LightSource
 	{
 		if (enabled) {
 
-			color totalForThisLight = BLACK;
+			color total = BLACK;
 
-			// TODO
+            dvec3 lightDir = glm::normalize(lightPositionWorldCoordinates - worldPosition);
+            dvec3 r = glm::normalize(2 * glm::dot(lightDir, worldNormal) * worldNormal - lightDir);
+            
+            total += glm::max(glm::dot(lightDir, worldNormal), 0.0) * diffuseLightColor * material.diffuseColor;
+            total += glm::pow(glm::max(glm::dot(lightDir, r), 0.0), material.shininess) * specularLightColor * material.specularColor;
+            total += LightSource::illuminate(eyePosition, worldPosition, worldNormal, material);
 
-			return totalForThisLight;
+            return total;
 		}
 		else {
 
@@ -109,11 +114,16 @@ struct DirectionalLight : public LightSource
 	{
 		if( enabled ) {
 
-			color totalForThisLight = BLACK;
+            dvec3 r = glm::normalize(2 * glm::dot(lightDirectionWorldCoordinates, worldNormal) * worldNormal - lightDirectionWorldCoordinates);
 
-			// TODO
 
-			return totalForThisLight;
+			color total = material.emissiveColor;
+
+            total += LightSource::illuminate(eyePosition, worldPosition, worldNormal, material);
+            total += glm::max(glm::dot(lightDirectionWorldCoordinates, worldNormal), 0.0) * diffuseLightColor * material.diffuseColor;
+            total += glm::pow(glm::max(glm::dot(lightDirectionWorldCoordinates, r), 0.0), material.shininess) * specularLightColor * material.specularColor;
+
+			return total;
 		}
 		else {
 
@@ -146,15 +156,23 @@ struct SpotLight : public PositionalLight
 
 	virtual color illuminate(const dvec3 & eyePosition, const dvec3 & worldPosition, dvec3 worldNormal, Material material)
 	{
+
+		//dont think this works
 		dvec3 negLight = glm::normalize(worldPosition - lightPositionWorldCoordinates);
 
+
 		if( enabled ) {
+            color total = PositionalLight::illuminate(eyePosition, worldPosition, worldNormal, material);
+            
+            double spotCosine = glm::dot(negLight, -spotDirection);
+            if (spotCosine > cutOffCosineRadians) {
+                double falloffFactor = (1 - (1 - spotCosine)) / (1 - cutOffCosineRadians);
+                return total *= falloffFactor ;
+            }
 
-			color totalForThisLight = BLACK;
+            
 
-			// TODO
-
-			return totalForThisLight;
+       		return total;
 		}
 		else {
 

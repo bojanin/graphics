@@ -1,8 +1,14 @@
 #include "Lab.h"
+#include "Camera.h"
 #include "Lights.h"
 
 
+
 /********************** GLOBALS ******************************/
+LightSource ambientLight(color(0.15, 0.15, 0.15, 1.0));
+PositionalLight lightPos(dvec3(-3, 3, -3), dvec4(0.75, 0.75, 0.75, 1.0));
+DirectionalLight lightDir(dvec3(1, 1, 1), dvec4(1.0, 1.0, 1.0, 1.0));
+SpotLight lightSpot(dvec3(0.0, 10.0, 0.0), dvec3(0.0, -1.0, 0.0), glm::cos(glm::radians(15.0)), RED);
 
 std::vector<LightSource*> lights;
 
@@ -14,13 +20,20 @@ FrameBuffer frameBuffer(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 // Objects in the scene
 
-// Pyramid
-Pyramid redPyramid(color(1.0, 0.0, 0.0, 0.5f), 1.0, 1.0 );
-Sphere rightPyr(MAGENTA,1);
-Pyramid leftPyr(BLUE, 1, 2);
-Pyramid twoPyr(WHITE, 1.0, 1.0);
-Pyramid rotatePyr(BLACK, 1.0, 1.0);
 
+Pyramid cyanPyr(CYAN, 1.0, 1.0);//
+Pyramid bluePyr(BLUE, 1.0, 1.0);//
+Pyramid whitePyr(WHITE, 1.0, 1.0);//
+Sphere graySphere(GRAY, 1.0, 16, 16);//
+Box magBox(MAGENTA, 1.0, 1.0, 1.0);//
+Box whiteBox(WHITE, 1.0, 1.0, 1.0);//
+Box blackBox(BLACK, 1.0, 1.0, 1.0);
+Box bluBox(BLUE, 1.0, 1.0, 1.0);//
+Box bluBox2(BLUE, 1.0, 1.0, 1.0);//
+Box greenBox(GREEN, 2.0, 2.0, 2.0);
+
+
+Camera camera(dvec3(0.0, 0.0, 12.0));
 // Reference plane
 ReferencePlane referencePlane;
 
@@ -36,32 +49,44 @@ View_Type view = FULL_SCREEN;
 
 void renderObjects()
 {
-    glm::dmat4 scalar;
-    scalar[0][0] = 2.0;
-    scalar[1][1] = 2.0;
-    scalar[2][2] = 2.0;
-	// Set Modeling transformation for the reference plane
-	PerVertex::modelingTransformation = glm::translate(dvec3(0.0, -3.0, 0.0));
+    referencePlane.setPosition(dvec3(0.0, -3.0, 0.0));
+    referencePlane.draw();
 
-	// Send the reference plane vertices down the pipeline
-	PerVertex::processTriangleVertices( referencePlane.c1PlaneVertices );
-	PerVertex::processTriangleVertices( referencePlane.c2PlaneVertices );
-	// Set modeling transformation for the center pyramid
-    PerVertex::modelingTransformation = glm::translate(dvec3(0.0, 0.0, 0.0)) * glm::rotate(angle, dvec3(0.0, 1.0, 0.0));
-	PerVertex::processTriangleVertices(redPyramid.triangleVertices);
-    PerVertex::modelingTransformation = glm::translate(dvec3(3.0, 0.0, 0.0)) * glm::rotate(angle, dvec3(1.0, 0.0, 0.0));
-    PerVertex::processTriangleVertices(rightPyr.triangleVertices);
-    PerVertex::modelingTransformation = glm::translate(dvec3(-3.0, 0.0, 0.0)) * glm::scale(scalar, dvec3(1.0, 1.0, 1.0)) * glm::rotate(angle, dvec3(0.0, 0.0, 1.0));
-    PerVertex::processTriangleVertices(leftPyr.triangleVertices);
+    // Set the position and orientation of the left pyramid and render it.
+    cyanPyr.setPosition( dvec3( -3.0, 0.0, 0.0  )  );
+    cyanPyr.setOrientation( angle, dvec3( 0.0, 0.0, 1.0  )  );
+    cyanPyr.setScale(2.0);
+    cyanPyr.draw(  );
     
-    PerVertex::modelingTransformation = glm::translate(dvec3( -3.5, -2.5, 3.5));
-    PerVertex::processTriangleVertices(twoPyr.triangleVertices);
-    PerVertex::modelingTransformation = glm::translate(dvec3(3.5, -2.5, -3.5));
-    PerVertex::processTriangleVertices(twoPyr.triangleVertices);
-    PerVertex::modelingTransformation = glm::rotate(-angle, dvec3(0.0, 1.0, 0.0)) * glm::translate(dvec3(10.0, 3.0, 0.0)) * glm::rotate(angle, dvec3(1.0, 0.0, 0.0));
-    PerVertex::processTriangleVertices(rotatePyr.triangleVertices);
-    PerVertex::modelingTransformation = glm::translate(dvec3(3.0, 0.0, 0.0)) * glm::rotate(angle, dvec3(1.0, 0.0, 0.0));
-    PerVertex::processTriangleVertices(rightPyr.triangleVertices);
+    bluBox2.setPosition(dvec3(3.5, -2.5, -3.5));
+    bluBox2.draw();
+
+    bluePyr.setPosition(dvec3(3.5, -1.5, -3.5));
+    bluePyr.draw();
+
+    graySphere.setPosition(dvec3(3.0, 0.0, 0.0));
+    graySphere.setOrientation(angle, dvec3(1.0, 0.0, 0.0));
+    graySphere.draw();
+
+    whitePyr.setPosition(dvec3(10.0 * glm::sin(-angle), 3.0, 10 * glm::cos(-angle)));
+    whitePyr.setOrientation(0, dvec3(1.0, 1.0, 1.0));
+    whitePyr.draw();
+
+    magBox.setPosition(dvec3(-0.5, -2.5, -0.5));
+    magBox.draw();
+
+   	whiteBox.setPosition(dvec3(0.5, -2.5, -0.5));
+   	whiteBox.draw();
+
+    blackBox.setPosition(dvec3(0.0, -2.5, 0.5));
+    blackBox.draw();
+    
+    bluBox.setPosition(dvec3(0.0, -1.5, 0.0));
+    bluBox.setOrientation(glm::radians(45.0), dvec3(0.0, 1.0, 0.0));
+    bluBox.draw();
+
+    greenBox.setPosition(dvec3(-3.0, -2.0, 3.0));
+    greenBox.draw();
 }
 
 
@@ -189,6 +214,34 @@ static void RenderSceneCB()
 	}
 
 } // end RenderSceneCB
+
+void cameraMenu(int value)
+{
+	switch( value ) {
+        case(0):
+            camera.view(dvec3(0.0, 0.0, 12.0));
+            break;
+		case(1):
+            camera.view(dvec3(0.0, 0.0, -12.0));
+			break;
+		case(2):
+            camera.view(dvec3(0.0, 15.0 * glm::pow(2, 0.5), -15.0 * glm::pow(2, 0.5)));
+            break;
+
+		case(3):
+            camera.view(dvec3(0.0, 15.0, 0.0), dvec3(0.0, 0.0, 0.0), dvec3(1.0, 0.0, -1.0));
+			break;
+		default:
+			std::cout << "Invalid view selection " << std::endl;
+	}
+
+    PerVertex::viewingTransformation = camera.getViewingTransformation();
+
+	// Signal GLUT to call display callback
+	glutPostRedisplay( );
+
+
+}
 
 
 // Reset viewport limits for full window rendering each time the window is resized.
@@ -325,14 +378,14 @@ void viewMenu( int value )
 {
 	switch( value ) {
 		case( 1 ):
-			PerVertex::viewingTransformation = glm::translate( glm::vec3( 0.0f, 0.0f, -14.0 ) );
+			camera.view(dvec3(0.0, 0.0, -12.0));
 			break;
 		case( 2 ):
-            PerVertex::viewingTransformation = glm::rotate(glm::translate( glm::vec3( 0.0f, 0.0f, -14.0 ) ),glm::radians(45.0f), glm::vec3(1.0f, 0.0f, 0.0)); 
+			camera.view(dvec3(0.0, 15.0 * glm::pow(2, 0.5), -15.0 * glm::pow(2, 0.5)));
 			break;
 
 		case( 3 ):
-            PerVertex::viewingTransformation = glm::rotate(glm::rotate(glm::translate(glm::vec3( 0.0f, 0.0f, -14.0 )) , glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0)), glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0));
+			camera.view(dvec3(0.0, 15.0, 0.0), dvec3(0.0, 0.0, 0.0), dvec3(1.0, 0.0, -1.0));
 			break;
 		case( 4 ):
             PerVertex::viewingTransformation = glm::lookAt(dvec3(0.0, 0.0, 14.0), dvec3(0.0, 0.0, 0.0), dvec3(0.0, 1.0, 0.0)); 
@@ -350,6 +403,7 @@ void viewMenu( int value )
 			std::cout << "Invalid view selection " << std::endl;
 	}
 
+ 	PerVertex::viewingTransformation = camera.getViewingTransformation();
 	// Signal GLUT to call display callback
 	glutPostRedisplay( );
 
@@ -421,6 +475,33 @@ void mainMenu(int value)
 
 } // end mainMenu
 
+void fogMenu( int value )
+{
+	switch( value ) {
+
+		case( 0 ):
+			FragmentOperations::fogSetting = NO_FOG;
+			break;
+		case( 1 ):
+			FragmentOperations::fogSetting = LINEAR_FOG;
+			break;
+		case( 2 ):
+			FragmentOperations::fogSetting = EXPONENTIAL_FOG;
+			break;
+		case( 3 ):
+			FragmentOperations::fogSetting = EXPONENTIAL_2_FOG;
+			break;
+		default:
+			std::cout << "no fog" << std::endl;
+	}
+
+	std::cout << "fog type: " << value << std::endl;
+
+	// Signal GLUT to call display callback
+	glutPostRedisplay( );
+
+}
+
 
 // To keep the console open on shutdown, start the project with Ctrl+F5 instead of just F5.
 int main(int argc, char** argv)
@@ -441,7 +522,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	// Create a window using a string and make it the current window.
-	GLuint world_Window = glutCreateWindow("Projection and Viewport Transformations");
+	GLuint world_Window = glutCreateWindow("cse287 Project two - Bojanits");
 
 	// Indicate to GLUT that the flow of control should return to the program after
 	// the window is closed and the GLUTmain loop is exited.
@@ -453,6 +534,12 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(KeyboardCB);
 	glutSpecialFunc(SpecialKeysCB);
 	glutIdleFunc(animate);
+
+	int fogMenuID = glutCreateMenu( fogMenu );
+	glutAddMenuEntry( "No Fog", 0 );
+	glutAddMenuEntry( "Linear Fog", 1 );
+	glutAddMenuEntry( "Exponential Fog", 2 );
+	glutAddMenuEntry( "Exponential 2 Fog", 3 );
 
 
 	// Create polygon render submenu
@@ -471,6 +558,12 @@ int main(int argc, char** argv)
 	glutAddMenuEntry( "View 5", 5 );
 	glutAddMenuEntry( "View 6", 6 );
 
+	int cameraMenuID = glutCreateMenu(cameraMenu);
+    glutAddMenuEntry("View 0", 0);
+    glutAddMenuEntry("View 1", 1);
+    glutAddMenuEntry("View 2", 2);
+    glutAddMenuEntry("View 3", 3);
+
 	int viewportMenuid = glutCreateMenu(viewPortMenu);
 	// Specify menu items and integer identifiers
 	glutAddMenuEntry("Full Screen", 1);
@@ -480,12 +573,19 @@ int main(int argc, char** argv)
 	// Create main submenu
 	int menu1id = glutCreateMenu( mainMenu );
 	glutAddSubMenu( "Render", polyMenuid );
+	glutAddSubMenu( "Fog Type", fogMenuID  );
+	 glutAddSubMenu("Camera", cameraMenuID);
 	glutAddSubMenu( "View", viewMenuid );
     glutAddSubMenu("ViewPort", viewportMenuid);
 	glutAddMenuEntry( "Quit", 0 );
 
 	// Attach menu to right mouse button
 	glutAttachMenu( GLUT_RIGHT_BUTTON );
+	lights.push_back(&ambientLight);
+    lights.push_back(&lightPos);
+    lights.push_back(&lightDir);
+    lights.push_back(&lightSpot);
+
 	// Create main submenu
 
 	// Attach menu to right mouse button

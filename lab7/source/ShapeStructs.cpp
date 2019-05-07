@@ -1,7 +1,118 @@
 #include "ShapeStructs.h"
 #include "Lab.h"
 
+Box::Box( color cubeColor, float width, float height, float depth )
+{
+    color c = cubeColor;
 
+    dvec4 v0(-width/2, height/2, depth/2, 1.0);
+    dvec4 v1(-width/2, height/2, -depth/2, 1.0);
+    dvec4 v2(width/2, height/2, -depth/2, 1.0);
+    dvec4 v3(width/2, height/2, depth/2, 1.0);
+
+    dvec4 v4(-width/2, -height/2, depth/2, 1.0);
+    dvec4 v5(-width/2, -height/2, -depth/2, 1.0);
+    dvec4 v6(width/2, -height/2, -depth/2, 1.0);
+    dvec4 v7(width/2, -height/2, depth/2, 1.0);
+
+    dvec4 n(findUnitNormal(v0.xyz, v2.xyz, v1.xyz), 0.0);
+
+	triangleVertices.push_back(VertexData(v0, c, n));
+	triangleVertices.push_back(VertexData(v2, c, n));
+	triangleVertices.push_back(VertexData(v1, c, n));
+
+    n = dvec4(findUnitNormal(v0.xyz, v3.xyz, v2.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v0, c, n));
+	triangleVertices.push_back(VertexData(v3, c, n));
+	triangleVertices.push_back(VertexData(v2, c, n));
+
+    n = dvec4(findUnitNormal(v4.xyz, v5.xyz, v6.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v4, c, n));
+	triangleVertices.push_back(VertexData(v5, c, n));
+	triangleVertices.push_back(VertexData(v6, c, n));
+
+    n = dvec4(findUnitNormal(v7.xyz, v4.xyz, v6.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v7, c, n));
+	triangleVertices.push_back(VertexData(v4, c, n));
+	triangleVertices.push_back(VertexData(v6, c, n));
+
+    n = dvec4(findUnitNormal(v4.xyz, v3.xyz, v0.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v4, c, n));
+	triangleVertices.push_back(VertexData(v3, c, n));
+	triangleVertices.push_back(VertexData(v0, c, n));
+
+    n = dvec4(findUnitNormal(v4.xyz, v7.xyz, v3.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v4, c, n));
+	triangleVertices.push_back(VertexData(v7, c, n));
+	triangleVertices.push_back(VertexData(v3, c, n));
+
+    n = dvec4(findUnitNormal(v2.xyz, v5.xyz, v1.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v2, c, n));
+	triangleVertices.push_back(VertexData(v5, c, n));
+	triangleVertices.push_back(VertexData(v1, c, n));
+
+    n = dvec4(findUnitNormal(v2.xyz, v6.xyz, v5.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v2, c, n));
+	triangleVertices.push_back(VertexData(v6, c, n));
+	triangleVertices.push_back(VertexData(v5, c, n));
+
+    n = dvec4(findUnitNormal(v5.xyz, v0.xyz, v1.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v5, c, n));
+	triangleVertices.push_back(VertexData(v0, c, n));
+	triangleVertices.push_back(VertexData(v1, c, n));
+
+    n = dvec4(findUnitNormal(v5.xyz, v4.xyz, v0.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v5, c, n));
+	triangleVertices.push_back(VertexData(v4, c, n));
+	triangleVertices.push_back(VertexData(v0, c, n));
+
+    n = dvec4(findUnitNormal(v2.xyz, v3.xyz, v7.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v2, c, n));
+	triangleVertices.push_back(VertexData(v3, c, n));
+	triangleVertices.push_back(VertexData(v7, c, n));
+
+    n = dvec4(findUnitNormal(v7.xyz, v6.xyz, v2.xyz), 0.0);
+
+    triangleVertices.push_back(VertexData(v7, c, n));
+	triangleVertices.push_back(VertexData(v6, c, n));
+	triangleVertices.push_back(VertexData(v2, c, n));
+
+}
+
+void Shape::draw() {
+
+    PerVertex::modelingTransformation = position * orientation * scale;
+     PerVertex::processTriangleVertices(triangleVertices);
+}
+void Shape::setPosition(const dvec3 & positionVector)
+{
+    position = glm::translate(positionVector);
+}
+
+void Shape::setOrientation(const double & angle, const dvec3 & axis)
+{
+    orientation = glm::rotate(angle, axis);
+}
+
+void Shape::setScale(const double & scaleValue)
+{
+    glm::dmat4 scaleModel;
+    scaleModel[0][0] = scaleValue;
+    scaleModel[1][1] = scaleValue;
+    scaleModel[2][2] = scaleValue;
+
+    scale = glm::scale(scaleModel, dvec3(1.0, 1.0, 1.0));
+}
 Pyramid::Pyramid( color pyColor, double width, double height)
 {
 	color c = pyColor;
@@ -57,19 +168,19 @@ ReferencePlane::ReferencePlane( double planeWidth, color c1, color c2 )
 {
 	dvec4 n(0.0, 1.0, 0.0, 0.0);
 
-	c1PlaneVertices.push_back(VertexData(dvec4(0.0, 0.0, 0.0, 1.0), color1, n));
-	c1PlaneVertices.push_back(VertexData(dvec4(-planeWidth / 2.0, 0.0, -planeWidth / 2.0, 1.0), color1, n));
-	c1PlaneVertices.push_back(VertexData(dvec4(-planeWidth / 2.0, 0.0, planeWidth / 2.0, 1.0), color1, n));
-	c1PlaneVertices.push_back(VertexData(dvec4(0.0, 0.0, 0.0, 1.0), color1, n));
-	c1PlaneVertices.push_back(VertexData(dvec4(planeWidth / 2.0, 0.0, planeWidth / 2.0, 1.0), color1, n));
-	c1PlaneVertices.push_back(VertexData(dvec4(planeWidth / 2.0, 0.0, -planeWidth / 2.0, 1.0), color1, n));
+	triangleVertices.push_back(VertexData(dvec4(0.0, 0.0, 0.0, 1.0), color1, n));
+	triangleVertices.push_back(VertexData(dvec4(-planeWidth / 2.0, 0.0, -planeWidth / 2.0, 1.0), color1, n));
+	triangleVertices.push_back(VertexData(dvec4(-planeWidth / 2.0, 0.0, planeWidth / 2.0, 1.0), color1, n));
+	triangleVertices.push_back(VertexData(dvec4(0.0, 0.0, 0.0, 1.0), color1, n));
+	triangleVertices.push_back(VertexData(dvec4(planeWidth / 2.0, 0.0, planeWidth / 2.0, 1.0), color1, n));
+	triangleVertices.push_back(VertexData(dvec4(planeWidth / 2.0, 0.0, -planeWidth / 2.0, 1.0), color1, n));
 
-	c2PlaneVertices.push_back(VertexData(dvec4(0.0, 0.0, 0.0, 1.0), color2, n));
-	c2PlaneVertices.push_back(VertexData(dvec4(planeWidth / 2.0, 0.0, -planeWidth / 2.0, 1.0), color2, n));
-	c2PlaneVertices.push_back(VertexData(dvec4(-planeWidth / 2.0, 0.0, -planeWidth / 2.0, 1.0), color2, n));
-	c2PlaneVertices.push_back(VertexData(dvec4(0.0, 0.0, 0.0, 1.0), color2, n));
-	c2PlaneVertices.push_back(VertexData(dvec4(-planeWidth / 2.0, 0.0, planeWidth / 2.0, 1.0), color2, n));
-	c2PlaneVertices.push_back(VertexData(dvec4(planeWidth / 2.0, 0.0, planeWidth / 2.0, 1.0), color2, n));
+	triangleVertices.push_back(VertexData(dvec4(0.0, 0.0, 0.0, 1.0), color2, n));
+	triangleVertices.push_back(VertexData(dvec4(planeWidth / 2.0, 0.0, -planeWidth / 2.0, 1.0), color2, n));
+	triangleVertices.push_back(VertexData(dvec4(-planeWidth / 2.0, 0.0, -planeWidth / 2.0, 1.0), color2, n));
+	triangleVertices.push_back(VertexData(dvec4(0.0, 0.0, 0.0, 1.0), color2, n));
+	triangleVertices.push_back(VertexData(dvec4(-planeWidth / 2.0, 0.0, planeWidth / 2.0, 1.0), color2, n));
+	triangleVertices.push_back(VertexData(dvec4(planeWidth / 2.0, 0.0, planeWidth / 2.0, 1.0), color2, n));
 }
 
 

@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/Users/tommy/Documents/graphics/lab7/source/Camera.cpp" "/Users/tommy/Documents/graphics/lab7/build/CMakeFiles/output.dir/source/Camera.cpp.o"
   "/Users/tommy/Documents/graphics/lab7/source/ClippingPlane.cpp" "/Users/tommy/Documents/graphics/lab7/build/CMakeFiles/output.dir/source/ClippingPlane.cpp.o"
   "/Users/tommy/Documents/graphics/lab7/source/Defines.cpp" "/Users/tommy/Documents/graphics/lab7/build/CMakeFiles/output.dir/source/Defines.cpp.o"
   "/Users/tommy/Documents/graphics/lab7/source/FrameBuffer.cpp" "/Users/tommy/Documents/graphics/lab7/build/CMakeFiles/output.dir/source/FrameBuffer.cpp.o"

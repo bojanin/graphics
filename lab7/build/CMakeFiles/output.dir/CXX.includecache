@@ -48,20 +48,6 @@ Defines.h
 Lights.h
 ../source/headers/Lights.h
 
-../source/headers/Lab.h
-Defines.h
-../source/headers/Defines.h
-FrameBuffer.h
-../source/headers/FrameBuffer.h
-PerVertexOperations.h
-../source/headers/PerVertexOperations.h
-Lights.h
-../source/headers/Lights.h
-ShapeStructs.h
-../source/headers/ShapeStructs.h
-VertexData.h
-../source/headers/VertexData.h
-
 ../source/headers/Lights.h
 Defines.h
 ../source/headers/Defines.h
@@ -104,37 +90,13 @@ PerFragmentOperations.h
 VertexData.h
 ../source/headers/VertexData.h
 
-../source/headers/ShapeStructs.h
-Defines.h
-../source/headers/Defines.h
-lab.h
-../source/headers/lab.h
-VertexData.h
-../source/headers/VertexData.h
-
 ../source/headers/VertexData.h
 Defines.h
 ../source/headers/Defines.h
 Material.h
 ../source/headers/Material.h
 
-../source/headers/lab.h
-Defines.h
-../source/headers/Defines.h
-FrameBuffer.h
-../source/headers/FrameBuffer.h
-PerVertexOperations.h
-../source/headers/PerVertexOperations.h
-Lights.h
-../source/headers/Lights.h
-ShapeStructs.h
-../source/headers/ShapeStructs.h
-VertexData.h
-../source/headers/VertexData.h
-
-/Users/tommy/Documents/graphics/lab7/source/Lab.cpp
-Lab.h
-/Users/tommy/Documents/graphics/lab7/source/Lab.h
-Lights.h
-/Users/tommy/Documents/graphics/lab7/source/Lights.h
+/Users/tommy/Documents/graphics/lab7/source/PerFragmentOperations.cpp
+PerFragmentOperations.h
+/Users/tommy/Documents/graphics/lab7/source/PerFragmentOperations.h
 
