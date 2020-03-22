@@ -45,7 +45,7 @@ Code clarity is focused on more than code quality for learning benefits.
 
 Run the following commands in order.
 
-`cd <lab name>/build`
+`cd lab7/build`
 
 `cmake ..`
 
