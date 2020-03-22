@@ -196,7 +196,7 @@ static void RenderSceneCB()
 		angle += glm::radians(1.0);
 
 		// Determine the position of the viewpoint in world coordinates
-		PerVertex::eyePositionInWorldCoords = glm::inverse(PerVertex::viewingTransformation)[3].xyz;
+		PerVertex::eyePositionInWorldCoords = glm::inverse(PerVertex::viewingTransformation)[3];
 
         switch(view) {
             case VERTICAL_SPLIT:

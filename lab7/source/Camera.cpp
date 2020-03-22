@@ -7,7 +7,7 @@ Camera::Camera(dvec3 position, dvec3 direction, dvec3 up) {
 Camera::~Camera() {}
 
 glm::dvec3 Camera::getWorldCoordinateViewPosition() {
-    return glm::inverse(viewTrans)[3].xyz;
+  return glm::inverse(viewTrans)[3];
 }
 
 

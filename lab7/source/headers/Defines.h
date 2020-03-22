@@ -7,7 +7,15 @@
 
 // Glut takes care of all the system-specific chores required for creating windows, 
 // initializing OpenGL contexts, and handling input events
-#include <GL/freeglut.h>
+#ifdef __APPLE__
+#  include <OpenGL/gl.h>
+#  include <OpenGL/glu.h>
+#  include <GLUT/glut.h>
+#else
+#  include <GL/gl.h>
+#  include <GL/glu.h>
+#  include <GL/freeglut.h>
+#endif
 
 // Initialize matrices to Identity and vectors to zero vector
 #define GLM_FORCE_CTOR_INIT

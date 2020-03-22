@@ -43,7 +43,7 @@ void drawVerticalLine(VertexData v0, VertexData v1)
 	for (double y = v0.position.y; y < v1.position.y; y++) {
 
 		// Interpolate vertex attributes
-		double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position.xy, v1.position.xy, dvec2(v0.position.x, y));
+		double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position, v1.position, dvec2(v0.position.x, y));
 
 		Fragment fragment;
 
@@ -76,7 +76,7 @@ void drawHorizontalLine(VertexData v0, VertexData v1)
 	for (double x = v0.position.x; x < v1.position.x; x++) {
 
 		// Interpolate vertex attributes
-		double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position.xy, v1.position.xy, dvec2(x, v0.position.y));
+		double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position, v1.position, dvec2(x, v0.position.y));
 
 		Fragment fragment;
 
@@ -118,7 +118,7 @@ void midPointLine(VertexData v0, VertexData v1)
 		for (double x = v0.position.x; x < v1.position.x; x += 1.0) {
 
 			// Interpolate vertex attributes
-			double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position.xy, v1.position.xy, dvec2(x, y));
+			double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position, v1.position, dvec2(x, y));
 
 			Fragment fragment;
 
@@ -155,7 +155,7 @@ void midPointLine(VertexData v0, VertexData v1)
 		for (double y = v0.position.y; y < v1.position.y; y += 1.0) {
 
 			// Interpolate vertex attributes
-			double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position.xy, v1.position.xy, dvec2(x, y));
+			double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position, v1.position, dvec2(x, y));
 
 			Fragment fragment;
 
@@ -193,7 +193,7 @@ void midPointLine(VertexData v0, VertexData v1)
 		for (double x = v0.position.x; x < v1.position.x; x += 1.0) {
 
 			// Interpolate vertex attributes
-			double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position.xy, v1.position.xy, dvec2(x, y));
+			double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position, v1.position, dvec2(x, y));
 
 			Fragment fragment;
 
@@ -231,7 +231,7 @@ void midPointLine(VertexData v0, VertexData v1)
 		for (double y = v0.position.y; y > v1.position.y; y -= 1.0) {
 
 			// Interpolate vertex attributes
-			double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position.xy, v1.position.xy, dvec2(x, y));
+			double weight = cheapNonPerspectiveCorrectInterpolationForLines(v0.position, v1.position, dvec2(x, y));
 
 			Fragment fragment;
 

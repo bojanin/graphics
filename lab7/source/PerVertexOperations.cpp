@@ -153,7 +153,7 @@ std::vector<VertexData> PerVertex::transformVerticesToWorldCoordinates( const dm
 
 		// Transform the position and surface normal to world coordinates
 		vt.position = modelMatrix * v.position;
-		vt.worldPosition = vt.position.xyz;
+		vt.worldPosition = vt.position;
 		vt.worldNormal = modelingTransfomationForNormals * v.localNormal;
 
 		transformedVertices.push_back( vt );
@@ -243,8 +243,8 @@ void PerVertex::processTriangleVertices(const std::vector<VertexData> & objectCo
     const dvec3 viewDirection(0.0, 0.0, -1.0);
     
     for(unsigned int i = 0; i < triangleVerts.size() - 2; i += 3) {
-       dvec3 normal = findUnitNormal(triangleVerts[i].position.xyz,
-               triangleVerts[i+1].position.xyz, triangleVerts[i+2].position.xyz);
+       dvec3 normal = findUnitNormal(triangleVerts[i].position,
+               triangleVerts[i+1].position, triangleVerts[i+2].position);
         if (glm::dot(viewDirection, normal) <= 0.0) {
             forwardFacingTriangles.push_back(triangleVerts[i]);
             forwardFacingTriangles.push_back(triangleVerts[i+1]);
